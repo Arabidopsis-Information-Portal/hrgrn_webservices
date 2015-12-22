@@ -1,0 +1,13 @@
+name: passthrough_nrgrn
+version: 0.1
+description: NRGRN Endpoint
+type: passthrough
+url: http://plantgrn.noble.org/hrgrn
+whitelist:
+  - http://plantgrn.noble.org/hrgrn
+  forward:
+    - Accept-Encoding
+    - Content-Type
+    - Referer
+    - Origin
+    - accept
