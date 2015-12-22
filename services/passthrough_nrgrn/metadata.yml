@@ -4,4 +4,4 @@ description: NRGRN Endpoint
 type: passthrough
 url: http://plantgrn.noble.org/hrgrn
 whitelist:
-  - http://plantgrn.noble.org/hrgrn
+  - plantgrn.noble.org
