@@ -5,9 +5,3 @@ type: passthrough
 url: http://plantgrn.noble.org/hrgrn
 whitelist:
   - http://plantgrn.noble.org/hrgrn
-  forward:
-    - Accept-Encoding
-    - Content-Type
-    - Referer
-    - Origin
-    - accept
