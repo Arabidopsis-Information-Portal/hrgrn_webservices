@@ -3,7 +3,7 @@ description: "HRGRN Endpoint"
 icon: logo-small.png
 name: passthrough_hrgrn
 type: passthrough
-url: "http://plantgrn.noble.org/hrgrn"
+url: http://plantgrn.noble.org/hrgrn
 version: 0.1
 whitelist:
   - plantgrn.noble.org:
