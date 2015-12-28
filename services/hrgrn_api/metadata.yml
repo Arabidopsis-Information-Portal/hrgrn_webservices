@@ -10,13 +10,6 @@ tags:
   - gene hormone regulatory network
 whitelist:
     - plantgrn.noble.org:
-      deny:
-        - Authorization
-      forward:
-        - Accept-Encoding
-        - Referer
-        - Origin
-        - accept
 endpoints:
   /search:
           summary: Return Gene Information
