@@ -27,6 +27,7 @@ def search(arg):
     try:
         if output_format in ['cytoscape']:
             #headers = {'content-type': 'text/plain'}
+            #response= requests.get(svc_url, headers=headers)
             response = requests.get(svc_url)
             response.raise_for_status()
             response_text = response.text
