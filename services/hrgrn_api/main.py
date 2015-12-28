@@ -26,17 +26,18 @@ def search(arg):
 
     try:
         if output_format in ['cytoscape']:
-            headers = {'content-type': 'text/plain'}
-            response = requests.get(svc_url, headers=headers)
+            #headers = {'content-type': 'text/plain'}
+            response = requests.get(svc_url)
             response.raise_for_status()
             response_text = response.text
         else:
-            headers = {'content-type': 'application/json'}
-            response= requests.get(svc_url, headers=headers)
+            #headers = {'content-type': 'application/json'}
+            #response= requests.get(svc_url, headers=headers)
+            response = requests.get(svc_url)
             response.raise_for_status()
             response_text = response.text
-    except ValueError:
-        raise Exception('Unable to handle response '.format(response.text) )
+    except ValueError as e:
+        print "ValueError:", e.message
     except requests.exceptions.HTTPError as e:
          print "HTTPError:", e.message
     return response_text
