@@ -2,7 +2,7 @@
 description: Extract gene regulatory network for a given gene ID
 icon: logo-small.png
 name: hrgrn_api
-main_module: main.py
+main_module: services.hrgrn_api.main.py
 type: query
 url: http://plantgrn.noble.org/hrgrn
 version: 0.1
