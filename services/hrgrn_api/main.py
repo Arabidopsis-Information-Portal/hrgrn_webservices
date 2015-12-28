@@ -28,6 +28,8 @@ def search(arg):
         if output_format in ['cytoscape']:
             headers = { 'Accept-Encoding': 'deflate', 'content-type': 'text/plain'}
             response= requests.get(svc_url, headers=headers)
+            response.headers['Content-Type'] = 'text/plain'
+            response.headers['Accept-Encoding'] = 'deflate'
             response.raise_for_status()
             response_text = response.text
         else:
