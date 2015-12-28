@@ -46,9 +46,7 @@ def decode (page):
 
 def read_data(url):
     opener = urllib2.build_opener()
-    opener.addheaders = [('Referer', referer),
-    ('User-Agent', uagent),
-    ('Accept-Encoding', 'gzip,deflate')]
+    opener.addheaders = [('Accept-Encoding', 'gzip,deflate')]
     usock = opener.open(url)
     url = usock.geturl()
     data = decode(usock)
