@@ -11,16 +11,19 @@ import re
 #    {data: {id:'np13163',label:'4CL.1',type:'Protein',tftr:'',tips:'4CL.1; 4CL1; AT4CL1, AT1G51680, ID=np13163, Protein',locus:'AT1G51680',shape:'ellipse',background_color:'#FCFCFC',border_color:'#585858',color:'#000000'} }
 # ] which is invalid JSON
 
-def search(args):
-    geneID = args['geneID']
-    output_format = args['output_format']
+def search(arg):
+    geneID = arg['geneID']
+    #output_format = args['output_format']
+
+    output_format = 'cytoscape'
+    response_format = json
 
     if not output_format in ['json', 'cytoscape']:
         raise Exception('Invalid output format. Expected: json or cytoscape')
 
     #svc_url = 'http://plantgrn.noble.org/hrgrn/nodes?foreignID=' + geneID + '&format=json'
-    svc_url = "http://plantgrn.noble.org/hrgrn/nodes?foreignID=AT3G46810&format=json"
-    
+    svc_url = 'http://plantgrn.noble.org/hrgrn/nodes?foreignID=' + geneID + '&format=' + response_format
+
     try:
         if output_format in ['cytoscape']:
             headers = {'Accept-encoding', 'deflate','content-type': 'text/plain'}
