@@ -12,25 +12,27 @@ import re
 # ] which is invalid JSON
 
 def search(args):
-    geneID = arg['geneID']
-    format = arg['output_format']
+    geneID = args['geneID']
+    format = args['output_format']
 
     if not format in ['json', 'cytoscape']:
         raise Exception('Invalid output format. Expected: json or cytoscape')
 
-    svc_url = 'http://plantgrn.noble.org/hrgrn/nodes?foreignID=' + geneID + '&format=json'
+    #svc_url = 'http://plantgrn.noble.org/hrgrn/nodes?foreignID=' + geneID + '&format=json'
+    svc_url = "http://plantgrn.noble.org/hrgrn/nodes?foreignID=AT3G46810&format=json"
 
     try:
         if format = 'cytoscape':
             headers = {'Accept-encoding', 'gzip','content-type': 'text/plain'}
-            r = requests.get(svc_url, headers=headers)
+            r = requests.get(svc_url)
             r.raise_for_status()
             r_text = r.text
             print r_text
             print "---"
         else:
             headers = {'Accept-encoding', 'gzip','content-type': 'text/plain'}
-            r = requests.get(svc_url, headers=headers)
+            #r = requests.get(svc_url, headers=headers)
+            r = requests.get(svc_url)
             r.raise_for_status()
             r_text = r.text
             print r_text
