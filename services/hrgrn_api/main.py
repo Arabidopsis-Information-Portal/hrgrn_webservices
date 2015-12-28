@@ -5,6 +5,7 @@ import re
 import gzip
 import StringIO
 import zlib
+import urllib2
 
 text_response = "[" +\
     "{data: {id:'np25574',label:'AT3G46810',type:'Protein',tftr:'PHD',tips:'AT3G46810, ID=np25574, Protein, chromatin regulator family PHD',locus:'AT3G46810',shape:'diamond',background_color:'#FCFCFC',border_color:'#ff0000',color:'#000000'} }" + \
