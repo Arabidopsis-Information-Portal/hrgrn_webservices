@@ -18,7 +18,7 @@ def search(args):
     if not format in ['json', 'cytoscape']:
         raise Exception('Invalid output format. Expected: json or cytoscape')
 
-    svc_url = 'http://plantgrn.noble.org/hrgrn/nodes?foreignID=' + geneId + '&format=json'
+    svc_url = 'http://plantgrn.noble.org/hrgrn/nodes?foreignID=' + geneID + '&format=json'
 
     try:
         if format = 'cytoscape':
