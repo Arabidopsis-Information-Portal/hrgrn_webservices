@@ -30,8 +30,6 @@ def search(arg):
             response = requests.get(svc_url, headers=headers)
             response.raise_for_status()
             response_text = response.text
-            print response_text
-            print "---"
         else:
             headers = {'content-type': 'application/json'}
             response= requests.get(svc_url, headers=headers)
