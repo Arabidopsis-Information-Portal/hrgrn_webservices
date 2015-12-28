@@ -3,11 +3,13 @@ description: Extract gene regulatory network for a given gene ID
 icon: logo-small.png
 name: hrgrn_api
 main_module: services.hrgrn_api.main.py
-type: query
+type: generic
 url: http://plantgrn.noble.org/hrgrn
 version: 0.2
 tags:
   - gene hormone regulatory network
+whitelist:
+    - plantgrn.noble.org:
 endpoints:
   /search:
           summary: Return Gene Information
