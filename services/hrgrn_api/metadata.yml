@@ -9,8 +9,7 @@ version: 0.1
 tags:
   - gene hormone regulatory network
 endpoints:
-  /search/info/gene:
-    - get:
+  /search:
           summary: Return Gene Information
           description: Retrieves auxilary data used for a gene network analysis
           parameters:
