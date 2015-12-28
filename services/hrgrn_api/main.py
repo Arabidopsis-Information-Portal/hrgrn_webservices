@@ -16,7 +16,7 @@ def search(arg):
     #output_format = args['output_format']
 
     output_format = 'cytoscape'
-    response_format = json
+    response_format = 'json'
 
     if not output_format in ['json', 'cytoscape']:
         raise Exception('Invalid output format. Expected: json or cytoscape')
@@ -26,7 +26,7 @@ def search(arg):
 
     try:
         if output_format in ['cytoscape']:
-            headers = {'Accept-encoding', 'deflate','content-type': 'text/plain'}
+            headers = {'Accept-encoding':'deflate','content-type': 'text/plain'}
             r = requests.get(svc_url, headers=headers)
             response.raise_for_status()
             r_text = r.text
