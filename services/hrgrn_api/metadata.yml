@@ -11,16 +11,17 @@ tags:
 endpoints:
   /search:
           summary: Return Gene Information
+          produces:
+             - application/json
+             - text/plain
           description: Retrieves auxiliary data used for a gene network analysis
           parameters:
                - name: geneID
-                 in: query
                  description: gene ID
                  type: string
                  default: AT3G46810
                  required: true
                - name: output_format
-                 in: query
                  description: response format
                  type: string
                  enum:
@@ -28,13 +29,3 @@ endpoints:
                    - cytoscape
                  default: json
                  required: true
-
-whitelist:
-  - plantgrn.noble.org:
-      deny:
-        - Authorization
-      forward:
-        - Accept-Encoding
-        - Referer
-        - Origin
-        - accept

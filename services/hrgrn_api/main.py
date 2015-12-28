@@ -20,18 +20,18 @@ def search(args):
 
     #svc_url = 'http://plantgrn.noble.org/hrgrn/nodes?foreignID=' + geneID + '&format=json'
     svc_url = "http://plantgrn.noble.org/hrgrn/nodes?foreignID=AT3G46810&format=json"
-    r = requests.get(svc_url)
-
+    
     try:
         if output_format in ['cytoscape']:
-            headers = {'Accept-encoding', 'gzip','content-type': 'text/plain'}
+            headers = {'Accept-encoding', 'deflate','content-type': 'text/plain'}
+            r = requests.get(svc_url, headers=headers)
             response.raise_for_status()
             r_text = r.text
             print r_text
             print "---"
         else:
-            headers = {'Accept-encoding', 'gzip','content-type': 'text/plain'}
-            #r = requests.get(svc_url, headers=headers)
+            headers = {'content-type': 'application/json'}
+            r = requests.get(svc_url, headers=headers)
             response.raise_for_status()
             r_text = r.text
             print r_text
