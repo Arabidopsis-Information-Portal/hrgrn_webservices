@@ -36,7 +36,7 @@ def list(args):
     raise Exception('Not implemented yet')
 
 def transform_response(incoming_response):
-    return demjson.decode(incoming_response)
+    return demjson.decode(incoming_response.text)
 
 def build_payload(url):
     headers = { 'Accept-Encoding': 'gzip,deflate', 'content-type': 'text/plain'}
