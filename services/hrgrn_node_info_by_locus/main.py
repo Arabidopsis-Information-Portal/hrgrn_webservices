@@ -39,5 +39,6 @@ def transform_response(incoming_response):
     return demjson.decode(incoming_response)
 
 def build_payload(url):
-    r = requests.get(url)
+    headers = { 'Accept-Encoding': 'gzip,deflate', 'content-type': 'text/plain'}
+    r = requests.get(url, headers=headers)
     return transform_response(r)
