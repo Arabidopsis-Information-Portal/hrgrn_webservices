@@ -1,0 +1,44 @@
+---
+description: "Extract a gene node info"
+icon: logo-small.png
+name: hrgrn_api
+main_module: services.hrgrn_api.node_info.main.py
+type: query
+url: http://plantgrn.noble.org/hrgrn
+version: 0.1
+tags:
+  - biological network
+  - gene hormone regulatory network
+  - graph database
+  - methabolic pathway
+  - plant signal transduction
+whitelist:
+    - plantgrn.noble.org:
+endpoints:
+  /search:
+          summary: Return a gene node information for a given gene ID in the JSON format
+          description: Retrieves auxiliary data used for a gene network analysis
+          parameters:
+               - name: geneID
+                 description: gene ID
+                 type: string
+                 default: AT3G46810
+                 required: true
+  /list:
+         summary: Return a list of available gene nodes from Neo4j graph database
+requirements:
+     - demjson
+authors:
+    - email: bioinfo@noble.org, ibelyaev@jcvi.org
+      name: Xinbin Dai, Irina Belyaeva
+      sponsor_organization: The Samuel Roberts Noble Foundation, JCVI
+      sponsor_uri: http://plantgrn.noble.org/hrgrn, http://www.jcvi.org
+sources:
+    - title: 'HRGRN: A Graph Search-Empowered Integrative Database of Arabidopsis Signaling Transduction, Metabolism and Gene Regulation Networks'
+    - decsription: 'Dai, Xinbin. "HRGRN: A Graph Search-Empowered Integrative Database of Arabidopsis Signaling Transduction, Metabolism and Gene Regulation Networks." Plant and Animal Genome XXIII Conference. Plant and Animal Genome, 2015. Published in Plant Cell Physiol (2015) DOI: 10.1093/pcp/pcv200'
+    - language: en-us
+    - sponsor_organization_name: The Samuel Roberts Noble Foundation
+    - sponsor_uri: http://plantgrn.noble.org/hrgrn/
+    - provider_name: Patrick Zhao, Xinbin Dai
+    - provider_email: bioinfo@noble.org
+    - uri: http://pcp.oxfordjournals.org/content/early/2015/12/28/pcp.pcv200.long
