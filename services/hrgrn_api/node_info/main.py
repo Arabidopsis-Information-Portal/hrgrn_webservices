@@ -31,6 +31,9 @@ def search(arg):
     except requests.exceptions.HTTPError as e:
          print "HTTPError:", e.message
 
+def list(args):
+    raise Exception('Not implemented yet')
+
 def transform_response(incoming_response):
     return demjson.decode(incoming_response)
 
