@@ -32,8 +32,8 @@ def search(arg):
          print "HTTPError:", e.message
 
 def transform_response(incoming_response):
-    return demjson.decode(response.text)
+    return demjson.decode(incoming_response)
 
 def build_payload(url):
     response = requests.get(svc_url)
-    transform_response(response)
+    return transform_response(response)
