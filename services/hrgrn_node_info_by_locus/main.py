@@ -39,5 +39,5 @@ def transform_response(incoming_response):
     return demjson.decode(incoming_response)
 
 def build_payload(url):
-    response = requests.get(url)
-    return transform_response(response)
+    r = requests.get(url)
+    return transform_response(r)
