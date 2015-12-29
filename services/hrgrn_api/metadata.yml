@@ -20,3 +20,5 @@ endpoints:
                  type: string
                  default: AT3G46810
                  required: true
+requirements:
+     - demjson
