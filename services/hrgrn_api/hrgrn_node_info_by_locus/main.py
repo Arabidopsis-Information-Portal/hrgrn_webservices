@@ -23,8 +23,9 @@ def search(arg):
     svc_url = 'http://plantgrn.noble.org/hrgrn/nodes?foreignID=' + geneID + '&format=' + response_format
 
     try:
-            response = requests.get(svc_url)
-            print json.dumps(build_payload(svc_url))
+            response = build_payload(svc_url)
+            response.raise_for_status()
+            print json.dumps(response)
             print '---'
     except ValueError as e:
          print "ValueError:", e.message
