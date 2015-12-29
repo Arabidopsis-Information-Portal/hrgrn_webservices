@@ -24,7 +24,6 @@ def search(arg):
 
     try:
             response = build_payload(svc_url)
-            response.raise_for_status()
             print json.dumps(response)
             print '---'
     except ValueError as e:
@@ -41,4 +40,5 @@ def transform_response(incoming_response):
 def build_payload(url):
     headers = { 'Accept-Encoding': 'gzip,deflate', 'content-type': 'text/plain'}
     r = requests.get(url, headers=headers)
+    r.raise_for_status()
     return transform_response(r)
