@@ -1,0 +1,52 @@
+---
+description: "Build a subnetwork over user-submitted gene IDs"
+icon: logo-small.png
+name: hrgrn_subnetwork_by_locus
+main_module: services.hrgrn_subnetwork_by_locus.main.py
+type: query
+url: http://plantgrn.noble.org/hrgrn
+version: 0.1
+tags:
+  - biological network
+  - gene hormone regulatory network
+  - graph database
+  - methabolic pathway
+  - plant signal transduction
+whitelist:
+    - plantgrn.noble.org:
+endpoints:
+  /search:
+          summary: Returns a biological subnetwork over user-submitted gene stable identifiers in the JSON format
+          description: Builds a gene subnetwork
+          parameters:
+               - name: geneIDs
+                 description: comma-separated list of gene stable identifiers
+                 type: array
+                 items:
+                   type: string
+                   minItems: 2
+                   default: AT2G38470,AT3G55734,AT2G39885,AT3G26810
+                   required: true
+  /list:
+         summary: Not implemented yet
+requirements:
+     - demjson
+authors:
+    - name: Xinbin Dai
+      email: bioinfo@noble.org
+      sponsor_organization: The Samuel Roberts Noble Foundation
+      sponsor_uri: http://plantgrn.noble.org/hrgrn
+    - name: Irina Belyaeva
+      email: ibelyaev@jcvi.org
+      sponsor_organization: JCVI
+      sponsor_uri: http://www.jcvi.org
+
+sources:
+    - title: 'HRGRN: A Graph Search-Empowered Integrative Database of Arabidopsis Signaling Transduction, Metabolism and Gene Regulation Networks'
+      decsription: 'Dai, Xinbin. "HRGRN: A Graph Search-Empowered Integrative Database of Arabidopsis Signaling Transduction, Metabolism and Gene Regulation Networks." Plant and Animal Genome XXIII Conference. Plant and Animal Genome, 2015. Published in Plant Cell Physiol (2015) DOI: 10.1093/pcp/pcv200'
+      language: en-us
+      sponsor_organization_name: The Samuel Roberts Noble Foundation
+      sponsor_uri: http://plantgrn.noble.org/hrgrn/
+      provider_name: Patrick Zhao, Xinbin Dai
+      provider_email: bioinfo@noble.org
+      uri: http://pcp.oxfordjournals.org/content/early/2015/12/28/pcp.pcv200.long
