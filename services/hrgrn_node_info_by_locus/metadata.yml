@@ -13,7 +13,7 @@ tags:
   - methabolic pathway
   - plant signal transduction
 whitelist:
-    - plantgrn.noble.org:
+    - plantgrn.noble.org
 endpoints:
   /search:
           summary: Return a gene node information for a given gene ID in the JSON format
