@@ -9,7 +9,7 @@ import urllib2
 import demjson
 
 def search(arg):
-    geneID = arg['geneIDs']
+    geneID = arg['genes']
     response_format = 'json'
 
     svc_url = 'http://plantgrn.noble.org/hrgrn/nodes?foreignID=' + 'AT2G38470' + '&format=' + response_format

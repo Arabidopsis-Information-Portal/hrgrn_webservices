@@ -19,7 +19,7 @@ endpoints:
           summary: Returns a biological subnetwork over user-submitted gene stable identifiers in the JSON format
           description: Builds a gene subnetwork
           parameters:
-               - name: geneIDs
+               - name: genes
                  description: comma-separated list of gene stable identifiers
                  type: array
                  items:
