@@ -6,6 +6,7 @@ main_module: services.hrgrn_node_info_by_locus.main.py
 type: query
 url: http://plantgrn.noble.org/hrgrn
 version: 0.1
+timeout: 300
 tags:
   - biological network
   - gene hormone regulatory network

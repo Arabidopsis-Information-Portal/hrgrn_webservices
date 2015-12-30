@@ -38,7 +38,7 @@ def list(args):
 
 def getAllGeneNodes():
     response_format = 'json'
-    svc_url = 'http://plantgrn.noble.org/hrgrn/nodes?listall=T&format=' + response_format
+    svc_url = 'http://plantgrn.noble.org/hrgrn/nodes?listall=T&format=json'
 
     try:
             response = build_payload(svc_url)
