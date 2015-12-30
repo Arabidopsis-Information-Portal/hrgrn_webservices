@@ -12,7 +12,7 @@ def search(arg):
     genes = arg['genes']
     response_format = 'json'
 
-    svc_url = build_svc_url(params)
+    svc_url = build_svc_url(genes)
 
     try:
             response = build_payload(svc_url)
