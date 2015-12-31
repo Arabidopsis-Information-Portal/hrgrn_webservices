@@ -17,7 +17,9 @@ log.setLevel(logging.INFO)
 
 def handle_request(url, token, params, **kwargs):
 
-    headers = {"Authorization": "Bearer %s" % token}
+    headers = {}
+    if token:
+        headers["Authorization"] = "Bearer %s" % token
     response = requests.get(url, headers=headers, params=params)
 
     # Raise exception and abort if requests is not successful

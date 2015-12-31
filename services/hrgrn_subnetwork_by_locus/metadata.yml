@@ -13,7 +13,10 @@ tags:
   - methabolic pathway
   - plant signal transduction
 whitelist:
-    - plantgrn.noble.org:
+    - plantgrn.noble.org
+    - api.araport.org
+    - www.araport.org
+    - apps.araport.org
 endpoints:
   /search:
           summary: Returns a biological subnetwork over user-submitted gene stable identifiers in the JSON format
