@@ -21,7 +21,6 @@ def search(args):
     genes = args['genes']
     response_format = 'json'
 
-    token = args['_token']
     token = 'e94cca90bdfcfee77f66d6b821e6265e'
     log.info("Token:" + str(token))
 
@@ -53,3 +52,15 @@ def search(args):
 
 def list(args):
      raise Exception('Not implemented yet')
+
+def main():
+    """test logic for when running this module as the primary one!"""
+    args = {'genes': 'AT2G38470,AT3G55734,AT2G39885,AT3G26810', 'pathalg':'allSimplePaths', 'steps':'2','proteinModification':'validated,predicted', 'ppiInteraction':'validated,predicted', 'cpi':'validated,predicted','geneExpressionRegulation':'validated,predicted', 'srnaRegulation':'validated,predicted', 'transportedMolecule':'validated,predicted', 'composition':'validated,predicted', 'coexpressedGenePair':'validated,predicted', 'coexpValueCutoff':'0.8', 'cutoffNodeRelationships':'100'}
+    search(args)
+    param_map = rb.build_param_map(args, TOKEN)
+    log.info("Param Map:")
+    log.info(param_map)
+
+
+if __name__ == '__main__':
+    main()
