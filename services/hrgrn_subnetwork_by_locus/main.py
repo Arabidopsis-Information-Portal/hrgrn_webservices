@@ -17,8 +17,8 @@ logging.basicConfig(level=logging.INFO)
 log = logging.getLogger(__name__)
 log.setLevel(logging.INFO)
 
-def search(arg):
-    genes = arg['genes']
+def search(args):
+    genes = args['genes']
     response_format = 'json'
 
     token = args['_token']
@@ -29,7 +29,7 @@ def search(arg):
 
     try:
             #response = build_payload(svc_url)
-            response = rh.build_payload(svc_url, TOKEN, arg)
+            response = rh.build_payload(svc_url, TOKEN, args)
             print json.dumps(response)
             print '---'
     except ValueError as e:
