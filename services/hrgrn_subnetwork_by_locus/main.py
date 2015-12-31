@@ -12,6 +12,7 @@ from requests.exceptions import ConnectionError
 
 logging.basicConfig(level=logging.INFO)
 log = logging.getLogger(__name__)
+log.setLevel(logging.INFO)
 
 def search(arg):
     genes = arg['genes']
@@ -25,19 +26,19 @@ def search(arg):
             print '---'
     except ValueError as e:
          error_msg = "ValueError Exception:" + e.message
-         logger.error(error_msg, exc_info=True)
+         log.error(error_msg, exc_info=True)
          raise Exception(error_msg)
     except requests.exceptions.HTTPError as e:
          error_msg = "HTTPError Exception:" + e.message
-         logger.error(error_msg, exc_info=True)
+         log.error(error_msg, exc_info=True)
          raise Exception(error_msg)
     except ConnectionError as e:
          error_msg = "ConnectionError Exception:" + e.message
-         logger.error(error_msg, exc_info=True)
+         log.error(error_msg, exc_info=True)
          raise Exception(error_msg)
     except Exception as e:
          error_msg = "GenericError Exception:" + e.message
-         logger.error(error_msg, exc_info=True)
+         log.error(error_msg, exc_info=True)
          raise Exception(error_msg)
 
 
