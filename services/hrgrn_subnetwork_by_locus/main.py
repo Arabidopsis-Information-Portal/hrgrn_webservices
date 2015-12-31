@@ -29,7 +29,7 @@ def search(args):
 
     try:
             #response = build_payload(svc_url)
-            response = rh.build_payload(svc_url, TOKEN, args)
+            response = rh.build_payload(svc_url, token, args)
             print json.dumps(response)
             print '---'
     except ValueError as e:
