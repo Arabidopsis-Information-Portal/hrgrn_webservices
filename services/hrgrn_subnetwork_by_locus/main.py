@@ -7,6 +7,11 @@ import StringIO
 import zlib
 import urllib2
 import demjson
+import logging
+from requests.exceptions import ConnectionError
+
+logging.basicConfig(level=logging.INFO)
+log = logging.getLogger(__name__)
 
 def search(arg):
     genes = arg['genes']
@@ -19,9 +24,22 @@ def search(arg):
             print json.dumps(response)
             print '---'
     except ValueError as e:
-         print "ValueError:", e.message
+         error_msg = "ValueError Exception:" + e.message
+         logger.error(error_msg, exc_info=True)
+         raise Exception(error_msg)
     except requests.exceptions.HTTPError as e:
-         print "HTTPError:", e.message
+         error_msg = "HTTPError Exception:" + e.message
+         logger.error(error_msg, exc_info=True)
+         raise Exception(error_msg)
+    except ConnectionError as e:
+         error_msg = "ConnectionError Exception:" + e.message
+         logger.error(error_msg, exc_info=True)
+         raise Exception(error_msg)
+    except Exception as e:
+         error_msg = "GenericError Exception:" + e.message
+         logger.error(error_msg, exc_info=True)
+         raise Exception(error_msg)
+
 
 def list(args):
      raise Exception('Not implemented yet')
