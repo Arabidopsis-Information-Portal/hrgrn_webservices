@@ -21,10 +21,7 @@ def search(args):
     genes = args['genes']
     response_format = 'json'
 
-    token = 'e94cca90bdfcfee77f66d6b821e6265e'
-    log.info("Token:" + str(token))
-
-    #svc_url = rb.build_svc_url(genes)
+    token = args['_token']
     svc_url = svc.get_svc_base_url_temp()
 
     try:
