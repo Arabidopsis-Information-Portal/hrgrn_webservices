@@ -21,4 +21,4 @@ def get_svc_base_url_temp():
     return 'http://plantgrn.noble.org/hrgrn/subnetwork'
 
 def gene_svc_url():
-    return 'https://api.araport.org/community/v0.3/hrgrn/hrgrn_node_info_by_locus_v0.2/search'
+    return 'https://api.araport.org/community/v0.3/hrgrn/hrgrn_node_info_by_locus_v0.3/search'
