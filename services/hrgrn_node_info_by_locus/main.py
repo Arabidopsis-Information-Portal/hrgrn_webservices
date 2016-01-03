@@ -34,7 +34,7 @@ def search(arg):
          print "HTTPError:", e.message
 
 def list(args):
-    getAllGeneNodes()
+    raise Exception('Not implemented yet')
 
 def getAllGeneNodes():
     response_format = 'json'
