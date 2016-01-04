@@ -57,6 +57,10 @@ def search(arg):
          raise Exception(error_msg)
 
 def list(args):
+     #getAllGeneNodes(args)
+     raise Exception('Not implemented yet')
+
+def getAllGeneNodes(args):
     svc_url = svc.get_svc_base_url()
 
     params = {'listall': 'T'}
