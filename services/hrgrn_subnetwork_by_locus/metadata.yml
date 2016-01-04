@@ -5,7 +5,7 @@ name: hrgrn_subnetwork_by_locus
 main_module: services.hrgrn_subnetwork_by_locus.main.py
 type: query
 url: http://plantgrn.noble.org/hrgrn
-version: 0.4
+version: 0.5
 tags:
   - biological network
   - gene hormone regulatory network

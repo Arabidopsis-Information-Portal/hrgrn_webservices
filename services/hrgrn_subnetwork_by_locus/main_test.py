@@ -5,13 +5,15 @@ import logging
 import service as svc
 import request_builder as rb
 import request_handler as rh
+import main as driver
 from requests.exceptions import ConnectionError
+
 
 logging.basicConfig(level=logging.INFO)
 log = logging.getLogger(__name__)
 log.setLevel(logging.INFO)
 
-TOKEN="3e2fd14cd3d2f0215cadfafe52ce5e"
+TOKEN="8d7cf82b6c77503671bc5f6a2492bda3"
 
 def search(arg):
     genes = arg['genes']
