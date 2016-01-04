@@ -10,7 +10,7 @@ import demjson
 import logging
 import timer as timer
 from requests.exceptions import ConnectionError
-from requests_futures.sessions import FuturesSession
+from requests import Session
 import service as svc
 import request_handler as rh
 import request_builder as rb
@@ -27,12 +27,11 @@ log.setLevel(logging.INFO)
 #    {data: {id:'np13163',label:'4CL.1',type:'Protein',tftr:'',tips:'4CL.1; 4CL1; AT4CL1, AT1G51680, ID=np13163, Protein',locus:'AT1G51680',shape:'ellipse',background_color:'#FCFCFC',border_color:'#585858',color:'#000000'} }
 # ] which is invalid JSON
 
-session = FuturesSession(max_workers=10)
 
 def search(arg):
     geneID = arg['geneID']
-    response_format = 'json'
 
+    session = Session()
     svc_url = svc.get_svc_base_url()
 
     try:
@@ -55,9 +54,6 @@ def search(arg):
          error_msg = "GenericError Exception:" + e.message
          log.error(error_msg, exc_info=True)
          raise Exception(error_msg)
-
-def list(args):
-     raise Exception('Not implemented yet')
 
 def getAllGeneNodes(args):
     svc_url = svc.get_svc_base_url()

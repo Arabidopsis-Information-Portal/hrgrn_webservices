@@ -11,7 +11,6 @@ import demjson
 import logging
 import timer as timer
 from requests.exceptions import ConnectionError
-from requests_futures.sessions import FuturesSession
 import request_builder as rb
 
 logging.basicConfig(level=logging.INFO)
@@ -36,8 +35,7 @@ def build_payload(url, params, session, **kwargs):
         with timer.Timer() as t:
             headers = { 'Accept-Encoding': 'gzip,deflate', 'content-type': 'text/plain'}
             transformed_params = rb.build_param_map(params)
-            future_unparsed_result = session.get(url, params = transformed_params, headers=headers)
-            r = future_unparsed_result.result()
+            r = session.get(url, params = transformed_params, headers=headers)
             log.debug("Response Text:")
             log.debug(r.text)
             r.raise_for_status()

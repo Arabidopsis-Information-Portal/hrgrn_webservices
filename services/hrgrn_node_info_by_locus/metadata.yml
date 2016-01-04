@@ -24,12 +24,9 @@ endpoints:
                  type: string
                  default: AT3G46810
                  required: true
-  /list:
-         summary: Return a list of available gene nodes from Neo4j graph database
-         parameters: []
+
 requirements:
      - demjson
-     - requests-futures
 authors:
     - name: Xinbin Dai
       email: bioinfo@noble.org
