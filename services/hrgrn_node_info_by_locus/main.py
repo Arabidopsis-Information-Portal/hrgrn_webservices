@@ -28,7 +28,7 @@ def search(arg):
     svc_url = svc.get_svc_base_url()
 
     try:
-        response = rh.build_payload(svc_url, arg)
+        response = rh.build_payload(svc_url, arg, session)
         print json.dumps(response)
         print '---'
     except ValueError as e:
@@ -56,7 +56,7 @@ def getAllGeneNodes(args):
     try:
         with timer.Timer() as t:
             log.info("Service URL:" + svc_url)
-            response = rh.build_payload(svc_url, params)
+            response = rh.build_payload(svc_url, params, session)
             log.info(response)
             if (response):
                 print json.dumps(response)
