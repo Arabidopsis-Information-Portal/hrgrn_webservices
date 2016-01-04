@@ -17,14 +17,14 @@ logging.basicConfig(level=logging.INFO)
 log = logging.getLogger(__name__)
 log.setLevel(logging.INFO)
 
-TOKEN="e94cca90bdfcfee77f66d6b821e6265e"
+TOKEN="2ef6a475e54090f3eafa1b8991d3c921"
 
 def search(arg):
     genes = arg['genes']
     response_format = 'json'
 
     #svc_url = rb.build_svc_url(genes)
-    svc_url = svc.get_svc_base_url_temp()
+    svc_url = svc.get_svc_base_url()
 
     try:
             response = rh.build_payload(svc_url, TOKEN, arg)
@@ -53,7 +53,7 @@ def list(args):
 
 def main():
     """test logic for when running this module as the primary one!"""
-    args = {'genes': 'AT2G38470,AT3G55734,AT2G39885,AT3G26810', 'pathalg':'allSimplePaths', 'steps':'2','proteinModification':'validated,predicted', 'ppiInteraction':'validated,predicted', 'cpi':'validated,predicted','geneExpressionRegulation':'validated,predicted', 'srnaRegulation':'validated,predicted', 'transportedMolecule':'validated,predicted', 'composition':'validated,predicted', 'coexpressedGenePair':'validated,predicted', 'coexpValueCutoff':'0.8', 'cutoffNodeRelationships':'100'}
+    args = {'genes': 'AT2G38470,AT3G55734,AT2G39885,AT3G26810', 'pathalg':'allSimplePaths', 'steps':'2', 'showValidatedEdge': 'true', 'showPredictedEdge':'true', 'proteinModification':'true', 'ppiInteraction':'true', 'showppiInteractionPredicted': 'true', 'cpi':'true','geneExpressionRegulation':'true', 'srnaRegulation':'true', 'showsrnaRegulationPredicted': 'true', 'transportedMolecule':'true', 'composition':'true', 'coexpressedGenePair':'true', 'coexpValueCutoff':'0.8', 'cutoffNodeRelationships':'100'}
     search(args)
     param_map = rb.build_param_map(args, TOKEN)
     log.info("Param Map:")
