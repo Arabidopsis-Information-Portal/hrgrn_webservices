@@ -7,6 +7,7 @@ log = logging.getLogger(__name__)
 log.setLevel(logging.INFO)
 
 def get_node_by_gene_id(url, token, params):
+    log.info(url)
     response = rh.handle_request(url, token, params)
     node_id = response["result"][0][0]['data']['id']
     return node_id

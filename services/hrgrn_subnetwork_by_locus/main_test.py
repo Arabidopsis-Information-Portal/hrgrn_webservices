@@ -11,7 +11,7 @@ logging.basicConfig(level=logging.INFO)
 log = logging.getLogger(__name__)
 log.setLevel(logging.INFO)
 
-TOKEN="c4fb2e4b27f07a6b7a5c22a1d37dea91"
+TOKEN="3e2fd14cd3d2f0215cadfafe52ce5e"
 
 def search(arg):
     genes = arg['genes']
@@ -47,7 +47,7 @@ def list(args):
 
 def main():
     """test logic for when running this module as the primary one!"""
-    args = {'genes': 'AT2G38470,AT3G55734,AT2G39885,AT3G26810', 'pathalg':'allSimplePaths', 'steps':'2', 'showValidatedEdge': 'true', 'showPredictedEdge':'true', 'proteinModification':'true', 'ppiInteraction':'true', 'showppiInteractionPredicted': 'true', 'cpi':'true','geneExpressionRegulation':'true', 'srnaRegulation':'true', 'showsrnaRegulationPredicted': 'true', 'transportedMolecule':'true', 'composition':'true', 'coexpressedGenePair':'true', 'coexpValueCutoff':'0.8', 'cutoffNodeRelationships':'100'}
+    args = {'genes': 'AT2G38470,AT3G55734,AT2G39885,AT3G26810', 'pathalg':'allSimplePaths', 'steps':'2', 'showValidatedEdge': 'true', 'showPredictedEdge':'true', 'proteinModification':'true', 'ppiInteraction':'true', 'showppiInteractionPredicted': 'true', 'cpi':'true','geneExpressionRegulation':'true', 'srnaRegulation':'true', 'showsrnaRegulationPredicted': 'true', 'transportedMolecule':'true', 'composition':'true', 'coexpressedGenePair':'true', 'coexpValueCutoff':'0.8', 'cutoffNodeRelationships':'100', '_url': 'https://api.araport.org/community/v0.3', '_namespace': 'hrgrn'}
     search(args)
 
 
