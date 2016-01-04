@@ -112,8 +112,6 @@ endpoints:
                  default: 100
                  required: true
 
-  /list:
-         summary: Not implemented yet
 requirements:
      - demjson
 authors:
