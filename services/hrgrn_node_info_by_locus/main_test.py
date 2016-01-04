@@ -27,9 +27,9 @@ def main():
     #args = {'geneID': 'AT2G38470'}
     #driver.search(args)
 
-    # list test case
-    args = {}
-    driver.getAllGeneNodes(args)
+    # list test case - DON'T CALL THIS. Now it would kill the endpoint!!!
+    ##args = {}
+    ##driver.getAllGeneNodes(args)
     #search(args)
     #param_map = rb.build_param_map(args, TOKEN)
     #log.info("Param Map:")
