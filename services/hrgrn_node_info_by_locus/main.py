@@ -4,6 +4,7 @@ import requests
 import logging
 import timer as timer
 from requests.exceptions import ConnectionError
+from requests import Session
 import service as svc
 import request_handler as rh
 
@@ -23,6 +24,7 @@ def search(arg):
     locus = arg['locus']
     response_format = 'json'
 
+    session = Session()
     svc_url = svc.get_svc_base_url()
 
     try:
@@ -45,9 +47,6 @@ def search(arg):
          error_msg = "GenericError Exception:" + e.message
          log.error(error_msg, exc_info=True)
          raise Exception(error_msg)
-
-def list(args):
-     raise Exception('Not implemented yet')
 
 def getAllGeneNodes(args):
     svc_url = svc.get_svc_base_url()

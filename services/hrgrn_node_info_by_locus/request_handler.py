@@ -24,12 +24,12 @@ def transform_response(incoming_response, strictMode=False):
         log.info("Response Decoding has completed.")
     return decoded_text
 
-def build_payload(url, params, **kwargs):
+def build_payload(url, params, session, **kwargs):
     try:
         with timer.Timer() as t:
             headers = { 'Accept-Encoding': 'gzip,deflate', 'content-type': 'text/plain'}
             transformed_params = rb.build_param_map(params)
-            r = requests.get(url, params = transformed_params, headers=headers)
+            r = session.get(url, params = transformed_params, headers=headers)
             log.debug("Response Text:")
             log.debug(r.text)
             r.raise_for_status()

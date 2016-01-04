@@ -1,8 +1,8 @@
 ---
-description: "Build a subnetwork over user-submitted gene IDs"
+description: "Node details by locus"
 icon: logo-small.png
-name: hrgrn_subnetwork_by_locus
-main_module: services.hrgrn_subnetwork_by_locus.main.py
+name: hrgrn_node_details_by_locus
+main_module: services.hrgrn_node_details_by_locus.main.py
 type: query
 url: http://plantgrn.noble.org/hrgrn
 version: 0.5
@@ -15,19 +15,18 @@ tags:
 whitelist:
     - plantgrn.noble.org
     - api.araport.org
+    - www.araport.org
+    - apps.araport.org
 endpoints:
   /search:
-          summary: Returns a biological subnetwork over user-submitted gene stable identifiers in the JSON format
-          description: Builds a gene subnetwork
+          summary: Returns a gene node detailed information for a given gene ID in the JSON format
+          description: Builds a gene node detailed view
           parameters:
-               - name: genes
-                 description: comma-separated list of gene stable identifiers
-                 type: array
-                 items:
-                   type: string
-                   minItems: 2
-                   required: true
-                 default: AT2G38470,AT3G55734,AT2G39885
+               - name: geneID
+                 description: gene ID
+                 type: string
+                 default: AT3G46810
+                 required: true
                - name: pathalg
                  description: network path algorithm
                  type: string
@@ -113,6 +112,8 @@ endpoints:
                  default: 100
                  required: true
 
+  /list:
+         summary: Not implemented yet
 requirements:
      - demjson
 authors:

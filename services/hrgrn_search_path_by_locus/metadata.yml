@@ -1,8 +1,8 @@
 ---
-description: "Build a subnetwork over user-submitted gene IDs"
+description: "Search a path between two gene IDs"
 icon: logo-small.png
-name: hrgrn_subnetwork_by_locus
-main_module: services.hrgrn_subnetwork_by_locus.main.py
+name: hrgrn_search_path_by_locus
+main_module: services.hrgrn_search_path_by_locus.main.py
 type: query
 url: http://plantgrn.noble.org/hrgrn
 version: 0.5
@@ -12,13 +12,16 @@ tags:
   - graph database
   - methabolic pathway
   - plant signal transduction
+
 whitelist:
     - plantgrn.noble.org
     - api.araport.org
+    - www.araport.org
+    - apps.araport.org
 endpoints:
   /search:
-          summary: Returns a biological subnetwork over user-submitted gene stable identifiers in the JSON format
-          description: Builds a gene subnetwork
+          summary: Returns a biological path between two submitted gene stable identifiers in the JSON format
+          description: Search a path between two genes. Please, submit no more than two gene IDs
           parameters:
                - name: genes
                  description: comma-separated list of gene stable identifiers
@@ -26,8 +29,9 @@ endpoints:
                  items:
                    type: string
                    minItems: 2
+                   maxItems: 2
                    required: true
-                 default: AT2G38470,AT3G55734,AT2G39885
+                 default: AT2G38470,AT3G55734
                - name: pathalg
                  description: network path algorithm
                  type: string
@@ -39,7 +43,7 @@ endpoints:
                - name: steps
                  decsription: number of steps
                  type: integer
-                 default: 2
+                 default: 3
                  required: true
                - name: showValidatedEdge
                  description: display validated edge type
