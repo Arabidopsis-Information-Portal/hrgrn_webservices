@@ -57,7 +57,6 @@ def search(arg):
          raise Exception(error_msg)
 
 def list(args):
-     #getAllGeneNodes(args)
      raise Exception('Not implemented yet')
 
 def getAllGeneNodes(args):
