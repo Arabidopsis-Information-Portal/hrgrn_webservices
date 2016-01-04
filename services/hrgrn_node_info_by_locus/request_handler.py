@@ -1,6 +1,7 @@
 # file: request_builder.py
 
 import requests
+import json
 import demjson
 import logging
 import timer as timer
@@ -9,7 +10,7 @@ import request_builder as rb
 
 logging.basicConfig(level=logging.INFO)
 log = logging.getLogger(__name__)
-log.setLevel(logging.INFO)
+log.setLevel(logging.DEBUG)
 
 def transform_response(incoming_response, strictMode=False):
     try:
@@ -33,7 +34,7 @@ def build_payload(url, params, session, **kwargs):
             log.debug("Response Text:")
             log.debug(r.text)
             r.raise_for_status()
-            parsed_response = transform_response(r)
+            parsed_response = json.loads(r.text)
     finally:
         log.info('Response Building took %.03f sec.' % t.interval)
         log.info("Response Building has completed.")
