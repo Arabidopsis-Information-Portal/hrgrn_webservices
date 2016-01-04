@@ -18,8 +18,6 @@ log = logging.getLogger(__name__)
 log.setLevel(logging.INFO)
 
 def search(args):
-    genes = args['genes']
-    response_format = 'json'
 
     token = args['_token']
     svc_url = svc.get_svc_base_url()
