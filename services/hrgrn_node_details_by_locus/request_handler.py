@@ -1,12 +1,6 @@
 # file: request_builder.py
 
-import json
 import requests
-import re
-import gzip
-import StringIO
-import zlib
-import urllib2
 import demjson
 import logging
 import request_builder as rb
@@ -39,8 +33,7 @@ def transform_response(incoming_response):
 def build_payload(url, token, params, **kwargs):
     headers = { 'Accept-Encoding': 'gzip,deflate', 'content-type': 'text/plain'}
     transformed_params = rb.build_param_map(params, token)
-    log.info("transformed_params")
-    log.info(transformed_params)
-    r = requests.get(url, params = transformed_params, headers=headers)
+    log.info("Transformed_params: {0}".format(transformed_params))
+    r = requests.get(url, params=transformed_params, headers=headers)
     r.raise_for_status()
     return transform_response(r)

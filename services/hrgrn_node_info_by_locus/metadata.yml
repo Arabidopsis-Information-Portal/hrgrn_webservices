@@ -19,7 +19,7 @@ endpoints:
           summary: Returns a gene node information for a given gene ID in the JSON format
           description: Retrieves auxiliary data used for a gene network analysis
           parameters:
-               - name: geneID
+               - name: locus
                  description: gene ID
                  type: string
                  default: AT3G46810
