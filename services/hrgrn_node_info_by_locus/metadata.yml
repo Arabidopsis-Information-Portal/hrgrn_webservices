@@ -5,7 +5,6 @@ name: hrgrn_node_info_by_locus
 main_module: services.hrgrn_node_info_by_locus.main.py
 type: query
 url: http://plantgrn.noble.org/hrgrn
-timeout: 120
 version: 0.4
 tags:
   - biological network
@@ -17,7 +16,7 @@ whitelist:
     - plantgrn.noble.org
 endpoints:
   /search:
-          summary: Return a gene node information for a given gene ID in the JSON format
+          summary: Returns a gene node information for a given gene ID in the JSON format
           description: Retrieves auxiliary data used for a gene network analysis
           parameters:
                - name: geneID
