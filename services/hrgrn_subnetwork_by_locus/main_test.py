@@ -55,7 +55,7 @@ def list(args):
 
 def main():
     """test logic for when running this module as the primary one!"""
-    args = {'genes': 'AT2G38470,AT3G55734,AT2G39885,AT3G26810', 'pathalg':'allSimplePaths', 'steps':'2', 'showValidatedEdge': 'true', 'showPredictedEdge':'true', 'proteinModification':'true', 'ppiInteraction':'true', 'showppiInteractionPredicted': 'true', 'cpi':'true','geneExpressionRegulation':'true', 'srnaRegulation':'true', 'showsrnaRegulationPredicted': 'true', 'transportedMolecule':'true', 'composition':'true', 'coexpressedGenePair':'true', 'coexpValueCutoff':'0.8', 'cutoffNodeRelationships':'100'}
+    args = {'genes': 'AT2G38470,AT3G55734,AT2G39885', 'pathalg':'allSimplePaths', 'steps':'2', 'showValidatedEdge': 'true', 'showPredictedEdge':'true', 'proteinModification':'true', 'ppiInteraction':'true', 'showppiInteractionPredicted': 'true', 'cpi':'true','geneExpressionRegulation':'true', 'srnaRegulation':'true', 'showsrnaRegulationPredicted': 'true', 'transportedMolecule':'true', 'composition':'true', 'coexpressedGenePair':'true', 'coexpValueCutoff':'0.8', 'cutoffNodeRelationships':'100'}
     search(args)
     param_map = rb.build_param_map(args, TOKEN)
     log.info("Param Map:")

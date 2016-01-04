@@ -29,7 +29,7 @@ endpoints:
                    type: string
                    minItems: 2
                    required: true
-                 default: AT2G38470,AT3G55734,AT2G39885,AT3G26810
+                 default: AT2G38470,AT3G55734,AT2G39885
                - name: pathalg
                  description: network path algorithm
                  type: string
@@ -115,8 +115,6 @@ endpoints:
                  default: 100
                  required: true
 
-  /list:
-         summary: Not implemented yet
 requirements:
      - demjson
 authors:
