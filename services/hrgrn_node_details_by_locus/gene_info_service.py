@@ -1,14 +1,6 @@
 # file: gene_info_service.py
 import json
-import requests
-import re
-import gzip
-import StringIO
-import zlib
-import urllib2
-import demjson
 import logging
-import request_builder as rb
 import request_handler as rh
 
 logging.basicConfig(level=logging.INFO)

@@ -22,7 +22,7 @@ endpoints:
           summary: Returns a gene node detailed information for a given gene ID in the JSON format
           description: Builds a gene node detailed view
           parameters:
-               - name: geneID
+               - name: locus 
                  description: gene ID
                  type: string
                  default: AT3G46810

@@ -1,15 +1,8 @@
 # file: main.py
 import json
 import requests
-import re
-import gzip
-import StringIO
-import zlib
-import urllib2
-import demjson
 import logging
 import service as svc
-import request_builder as rb
 import request_handler as rh
 from requests.exceptions import ConnectionError
 
@@ -23,9 +16,9 @@ def search(args):
     svc_url = svc.get_svc_base_url()
 
     try:
-            response = rh.build_payload(svc_url, token, args)
-            print json.dumps(response)
-            print '---'
+         response = rh.build_payload(svc_url, token, args)
+         print json.dumps(response)
+         print '---'
     except ValueError as e:
          error_msg = "ValueError Exception:" + e.message
          log.error(error_msg, exc_info=True)
