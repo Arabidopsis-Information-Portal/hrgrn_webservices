@@ -10,7 +10,7 @@ import request_builder as rb
 
 logging.basicConfig(level=logging.INFO)
 log = logging.getLogger(__name__)
-log.setLevel(logging.DEBUG)
+log.setLevel(logging.INFO)
 
 def transform_response(incoming_response, strictMode=False):
     try:
