@@ -1,12 +1,6 @@
 # file: main_test.py
 import json
 import requests
-import re
-import gzip
-import StringIO
-import zlib
-import urllib2
-import demjson
 import logging
 import service as svc
 import request_builder as rb
@@ -17,7 +11,7 @@ logging.basicConfig(level=logging.INFO)
 log = logging.getLogger(__name__)
 log.setLevel(logging.INFO)
 
-TOKEN="2ef6a475e54090f3eafa1b8991d3c921"
+TOKEN="c4fb2e4b27f07a6b7a5c22a1d37dea91"
 
 def search(arg):
     genes = arg['genes']
@@ -27,9 +21,9 @@ def search(arg):
     svc_url = svc.get_svc_base_url()
 
     try:
-            response = rh.build_payload(svc_url, TOKEN, arg)
-            print json.dumps(response)
-            print '---'
+         response = rh.build_payload(svc_url, TOKEN, arg)
+         print json.dumps(response)
+         print '---'
     except ValueError as e:
          error_msg = "ValueError Exception:" + e.message
          log.error(error_msg, exc_info=True)
@@ -55,9 +49,6 @@ def main():
     """test logic for when running this module as the primary one!"""
     args = {'genes': 'AT2G38470,AT3G55734,AT2G39885,AT3G26810', 'pathalg':'allSimplePaths', 'steps':'2', 'showValidatedEdge': 'true', 'showPredictedEdge':'true', 'proteinModification':'true', 'ppiInteraction':'true', 'showppiInteractionPredicted': 'true', 'cpi':'true','geneExpressionRegulation':'true', 'srnaRegulation':'true', 'showsrnaRegulationPredicted': 'true', 'transportedMolecule':'true', 'composition':'true', 'coexpressedGenePair':'true', 'coexpValueCutoff':'0.8', 'cutoffNodeRelationships':'100'}
     search(args)
-    param_map = rb.build_param_map(args, TOKEN)
-    log.info("Param Map:")
-    log.info(param_map)
 
 
 if __name__ == '__main__':
