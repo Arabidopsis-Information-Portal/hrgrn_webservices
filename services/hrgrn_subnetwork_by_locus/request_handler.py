@@ -36,13 +36,6 @@ def transform_response(incoming_response):
     log.info(incoming_response.text)
     return demjson.decode(incoming_response.text)
 
-
-def build_payload(url):
-    headers = { 'Accept-Encoding': 'gzip,deflate', 'content-type': 'text/plain'}
-    r = requests.get(url, headers=headers)
-    r.raise_for_status()
-    return transform_response(r)
-
 def build_payload(url, token, params, **kwargs):
     headers = { 'Accept-Encoding': 'gzip,deflate', 'content-type': 'text/plain'}
     transformed_params = rb.build_param_map(params, token)
