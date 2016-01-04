@@ -17,7 +17,7 @@ def get_nodes_by_genes(url, token, params):
     target_genes = params.split(',')
     nodes = []
     for item in target_genes:
-       gene_params = {'geneID':item}
+       gene_params = {'locus':item}
        log.info("Gene:" + item)
        node = get_node_by_gene_id(url, token, gene_params)
        if (node):
