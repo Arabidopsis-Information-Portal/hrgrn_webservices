@@ -1,13 +1,6 @@
 # file: service.py
 
-import json
-import requests
-import re
-import gzip
-import StringIO
-import zlib
-import urllib2
-import demjson
+import os.path as op
 import logging
 
 logging.basicConfig(level=logging.INFO)
