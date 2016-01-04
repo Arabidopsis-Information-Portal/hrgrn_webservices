@@ -40,17 +40,20 @@ def parse_gene_node_parameters(params):
 def get_param_list(params):
     return params.split(',')
 
-def build_splitted_params(params, prefix):
+def build_splitted_params(args, params, prefix):
    result = {}
-   hasValidated = False
-   hasPredicted = False
-   list_params = params.split(',')
-   for item in list_params:
-       log.info("Item Param:" + item)
-       if item == 'validated':
-           hasValidated = True
-       if item == 'predicted':
-           hasPredicted = True
+
+   hasValidated = args['showValidatedEdge']
+   hasPredicted = args['showPredictedEdge']
+
+   hasProteinToProteinInteractionPredicted = args['showppiInteractionPredicted']
+   hasSrnaRegulationPredictedPredicted = args['showsrnaRegulationPredicted']
+
+   if not (hasValidated):
+       hasValidated = True
+
+   if not (hasPredicted):
+       hasPredicted = True
 
    if hasPredicted:
        result[prefix + '_predicted'] = 'T'
@@ -61,6 +64,13 @@ def build_splitted_params(params, prefix):
        result[prefix + '_validated'] = 'T'
    else:
        result[prefix + '_validated'] = 'F'
+
+   # override individual data filters
+   if prefix == 'SRNAREGU' and not hasSrnaRegulationPredictedPredicted:
+       result[prefix + '_predicted'] = 'F'
+
+   if prefix == 'MODIFY' and not hasProteinToProteinInteractionPredicted:
+       result[prefix + '_predicted'] = 'F'
 
    return result
 
@@ -81,36 +91,37 @@ def build_param_map(args, token):
         if not (key == 'genes'):
             if key in ('pathalg', 'steps'):
                 params[key] = value
+
             elif key == 'proteinModification':
-                item_param_map= build_splitted_params(value, 'MODIFY')
+                item_param_map= build_splitted_params(args, value, 'MODIFY')
                 for item_key, item_value in item_param_map.iteritems():
                     params[item_key] = item_value
             elif key == 'ppiInteraction':
-                item_param_map= build_splitted_params(value, 'PPI')
+                item_param_map= build_splitted_params(args, value, 'PPI')
                 for item_key, item_value in item_param_map.iteritems():
                     params[item_key] = item_value
             elif key == 'cpi':
-                item_param_map= build_splitted_params(value, 'CPI')
+                item_param_map= build_splitted_params(args, value, 'CPI')
                 for item_key, item_value in item_param_map.iteritems():
                     params[item_key] = item_value
             elif key == 'geneExpressionRegulation':
-                item_param_map= build_splitted_params(value, 'GENEEXPREGU')
+                item_param_map= build_splitted_params(args, value, 'GENEEXPREGU')
                 for item_key, item_value in item_param_map.iteritems():
                     params[item_key] = item_value
             elif key == 'srnaRegulation':
-                item_param_map= build_splitted_params(value, 'SRNAREGU')
+                item_param_map= build_splitted_params(args, value, 'SRNAREGU')
                 for item_key, item_value in item_param_map.iteritems():
                     params[item_key] = item_value
             elif key == 'transportedMolecule':
-                item_param_map= build_splitted_params(value, 'MOLTRANSPORT')
+                item_param_map= build_splitted_params(args, value, 'MOLTRANSPORT')
                 for item_key, item_value in item_param_map.iteritems():
                     params[item_key] = item_value
             elif key == 'composition':
-                item_param_map= build_splitted_params(value, 'COMPOSITION')
+                item_param_map= build_splitted_params(args, value, 'COMPOSITION')
                 for item_key, item_value in item_param_map.iteritems():
                     params[item_key] = item_value
             elif key == 'coexpressedGenePair':
-                item_param_map= build_splitted_params(value, 'COEXP')
+                item_param_map= build_splitted_params(args, value, 'COEXP')
                 for item_key, item_value in item_param_map.iteritems():
                     params[item_key] = item_value
             elif key == 'coexpValueCutoff':

@@ -15,9 +15,6 @@ log = logging.getLogger(__name__)
 log.setLevel(logging.INFO)
 
 def get_svc_base_url():
-    return 'http://plantgrn.noble.org/hrgrn/subnetwork?hasParams=T&'
-
-def get_svc_base_url_temp():
     return 'http://plantgrn.noble.org/hrgrn/subnetwork'
 
 def gene_svc_url():

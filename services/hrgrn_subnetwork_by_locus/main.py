@@ -22,10 +22,9 @@ def search(args):
     response_format = 'json'
 
     token = args['_token']
-    svc_url = svc.get_svc_base_url_temp()
+    svc_url = svc.get_svc_base_url()
 
     try:
-            #response = build_payload(svc_url)
             response = rh.build_payload(svc_url, token, args)
             print json.dumps(response)
             print '---'
