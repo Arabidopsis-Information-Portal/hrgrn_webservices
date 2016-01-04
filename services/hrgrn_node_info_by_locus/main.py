@@ -7,6 +7,17 @@ import StringIO
 import zlib
 import urllib2
 import demjson
+import logging
+import timer as timer
+from requests.exceptions import ConnectionError
+from requests_futures.sessions import FuturesSession
+import service as svc
+import request_handler as rh
+import request_builder as rb
+
+logging.basicConfig(level=logging.INFO)
+log = logging.getLogger(__name__)
+log.setLevel(logging.INFO)
 
 # Invoke HRGRN web services given a gene ID and output format parameters
 # See http://plantgrn.noble.org/hrgrn/
@@ -17,43 +28,65 @@ import demjson
 # ] which is invalid JSON
 
 service_endpoint = 'http://plantgrn.noble.org/hrgrn/nodes?'
+session = FuturesSession(max_workers=10)
 
 def search(arg):
     geneID = arg['geneID']
     response_format = 'json'
 
-    svc_url = 'http://plantgrn.noble.org/hrgrn/nodes?foreignID=' + geneID + '&format=' + response_format
+    svc_url = svc.get_svc_base_url()
 
     try:
-            response = build_payload(svc_url)
+            response = rh.build_payload(svc_url, arg, session)
             print json.dumps(response)
             print '---'
     except ValueError as e:
-         print "ValueError:", e.message
+         error_msg = "ValueError Exception:" + e.message
+         log.error(error_msg, exc_info=True)
+         raise Exception(error_msg)
     except requests.exceptions.HTTPError as e:
-         print "HTTPError:", e.message
+         error_msg = "HTTPError Exception:" + e.message
+         log.error(error_msg, exc_info=True)
+         raise Exception(error_msg)
+    except ConnectionError as e:
+         error_msg = "ConnectionError Exception:" + e.message
+         log.error(error_msg, exc_info=True)
+         raise Exception(error_msg)
+    except Exception as e:
+         error_msg = "GenericError Exception:" + e.message
+         log.error(error_msg, exc_info=True)
+         raise Exception(error_msg)
 
 def list(args):
-    raise Exception('Not implemented yet')
+    svc_url = svc.get_svc_base_url()
 
-def getAllGeneNodes():
-    response_format = 'json'
-    svc_url = 'http://plantgrn.noble.org/hrgrn/nodes?listall=T&format=json'
+    params = {'listall': 'T'}
 
     try:
-            response = build_payload(svc_url)
-            print json.dumps(response)
-            print '---'
+            with timer.Timer() as t:
+                log.info("Service URL:" + svc_url)
+                response = rh.build_payload(svc_url, params, session)
+                log.info(response)
+                if (response):
+                    print json.dumps(response)
+                    print '---'
+                else:
+                    raise Exception("Response cannot be null!")
     except ValueError as e:
-         print "ValueError:", e.message
+         error_msg = "ValueError Exception:" + e.message
+         log.error(error_msg, exc_info=True)
+         raise Exception(error_msg)
     except requests.exceptions.HTTPError as e:
-         print "HTTPError:", e.message
-
-def transform_response(incoming_response):
-    return demjson.decode(incoming_response.text)
-
-def build_payload(url):
-    headers = { 'Accept-Encoding': 'gzip,deflate', 'content-type': 'text/plain'}
-    r = requests.get(url, headers=headers)
-    r.raise_for_status()
-    return transform_response(r)
+         error_msg = "HTTPError Exception:" + e.message
+         log.error(error_msg, exc_info=True)
+         raise Exception(error_msg)
+    except ConnectionError as e:
+         error_msg = "ConnectionError Exception:" + e.message
+         log.error(error_msg, exc_info=True)
+         raise Exception(error_msg)
+    except Exception as e:
+         error_msg = "GenericError Exception:" + e.message
+         log.error(error_msg, exc_info=True)
+         raise Exception(error_msg)
+    finally:
+            log.info('Request took %.03f sec.' % t.interval)
