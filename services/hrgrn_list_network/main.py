@@ -29,7 +29,7 @@ def getAllGeneNodes(args):
             response = rh.handle_request(svc_url, params)
             log.debug(response)
             if (response):
-                return 'application/json' , json.dumps(response)
+                return 'application/json' , json.dumps(json.loads(response))
             else:
                 raise Exception("Response cannot be null!")
     except ValueError as e:
