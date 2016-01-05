@@ -2,7 +2,7 @@
 description: "Returns all available gene/locus nodes extracted from a biological network"
 icon: logo-small.png
 name: hrgrn_list_network
-main_module: services.hrgrn_node_info_by_locus.main.py
+main_module: services.hrgrn_list_network.main.py
 type: generic
 url: http://plantgrn.noble.org/hrgrn
 version: 0.6
