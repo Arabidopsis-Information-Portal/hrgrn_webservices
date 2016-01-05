@@ -24,10 +24,11 @@ def list(args):
             #response = rh.build_payload(svc_url, params, session)
             response = rh.handle_request(svc_url, params)
             log.debug(response.text)
-            #if (response):
-                #return 'application/json' , json.dumps(json.loads(response.text))
-            #else:
-                #raise Exception("Response cannot be null!")
+            if (response):
+                print json.dumps(response.text)
+                print '---'
+            else:
+                raise Exception("Response cannot be null!")
     except ValueError as e:
          error_msg = "ValueError Exception:" + e.message
          log.error(error_msg, exc_info=True)
@@ -46,5 +47,3 @@ def list(args):
          raise Exception(error_msg)
     finally:
             log.info('Request took %.03f sec.' % t.interval)
-
-    return 'application/json' , json.dumps(json.loads(response.text))
