@@ -10,13 +10,9 @@ import request_handler as rh
 
 logging.basicConfig(level=logging.INFO)
 log = logging.getLogger(__name__)
-log.setLevel(logging.INFO)
+log.setLevel(logging.DEBUG)
 
 def list(args):
-    getAllGeneNodes(args)
-
-def getAllGeneNodes(args):
-
     session = Session()
     svc_url = svc.get_svc_base_url()
 
@@ -27,11 +23,11 @@ def getAllGeneNodes(args):
             log.info("Service URL:" + svc_url)
             #response = rh.build_payload(svc_url, params, session)
             response = rh.handle_request(svc_url, params)
-            log.debug(response)
-            if (response):
-                return 'application/json' , json.dumps(json.loads(response.text))
-            else:
-                raise Exception("Response cannot be null!")
+            log.debug(response.text)
+            #if (response):
+                #return 'application/json' , json.dumps(json.loads(response.text))
+            #else:
+                #raise Exception("Response cannot be null!")
     except ValueError as e:
          error_msg = "ValueError Exception:" + e.message
          log.error(error_msg, exc_info=True)
@@ -50,3 +46,5 @@ def getAllGeneNodes(args):
          raise Exception(error_msg)
     finally:
             log.info('Request took %.03f sec.' % t.interval)
+
+    return 'application/json' , json.dumps(response.text)
