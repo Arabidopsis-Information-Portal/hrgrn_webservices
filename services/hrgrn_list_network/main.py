@@ -25,7 +25,7 @@ def list(args):
             response = rh.handle_request(svc_url, params)
             log.debug(response.text)
             if (response):
-                print json.dumps(response.text)
+                print json.dumps(json.loads(response.text))
                 print '---'
             else:
                 raise Exception("Response cannot be null!")
