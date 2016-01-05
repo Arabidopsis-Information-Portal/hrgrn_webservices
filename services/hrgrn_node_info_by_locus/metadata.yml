@@ -1,11 +1,11 @@
 ---
 description: "Extract a gene node info"
-icon: logo-small.png
+icon: HRGRN_LOGO.png
 name: hrgrn_node_info_by_locus
 main_module: services.hrgrn_node_info_by_locus.main.py
 type: query
 url: http://plantgrn.noble.org/hrgrn
-version: 0.6
+version: 0.7
 tags:
   - biological network
   - gene hormone regulatory network
