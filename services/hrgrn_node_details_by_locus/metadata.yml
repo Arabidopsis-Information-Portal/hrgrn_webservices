@@ -19,11 +19,11 @@ whitelist:
     - apps.araport.org
 endpoints:
   /search:
-          summary: Returns a gene node detailed information for a given gene ID in the JSON format
+          summary: Returns a gene node detailed information for a given given locus/gene ID in the JSON format
           description: Builds a gene node detailed view
           parameters:
                - name: locus
-                 description: gene ID
+                 description: "locus/gene ID"
                  type: string
                  default: AT3G46810
                  required: true
