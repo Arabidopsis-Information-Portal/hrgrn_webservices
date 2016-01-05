@@ -1,6 +1,7 @@
 # file: request_builder.py
 
 import requests
+import json
 import demjson
 import logging
 import request_builder as rb
@@ -34,5 +35,8 @@ def build_payload(url, token, params, **kwargs):
     transformed_params = rb.build_param_map(params, token)
     log.info("Transformed params: {0}".format(transformed_params))
     r = requests.get(url, params=transformed_params, headers=headers)
+    log.debug("Response Text:")
+    log.debug(r.text)
     r.raise_for_status()
-    return transform_response(r)
+    parsed_response = json.loads(r.text)
+    return parsed_response
