@@ -34,7 +34,8 @@ def build_payload(url, params, session, **kwargs):
             log.debug("Response Text:")
             log.debug(r.text)
             r.raise_for_status()
-            parsed_response = re.sub('([{,])([^{:\s"]*):', lambda m: '%s"%s":'%(m.group(1),m.group(2)), r.text.replace("'",'"'))
+            #parsed_response = re.sub('([{,])([^{:\s"]*):', lambda m: '%s"%s":'%(m.group(1),m.group(2)), r.text.replace("'",'"'))
+            parsed_response = transform_response(r)
     finally:
         log.info('Response Building took %.03f sec.' % t.interval)
         log.info("Response Building has completed.")

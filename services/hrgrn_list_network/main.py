@@ -25,8 +25,8 @@ def getAllGeneNodes(args):
     try:
         with timer.Timer() as t:
             log.info("Service URL:" + svc_url)
-            #response = rh.build_payload(svc_url, params, session)
-            response = rh.handle_request(svc_url, params)
+            response = rh.build_payload(svc_url, params, session)
+            #response = rh.handle_request(svc_url, params)
             log.debug(response)
             if (response):
                 return 'application/json' , json.dumps(response)
