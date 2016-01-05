@@ -47,4 +47,4 @@ def list(args):
     finally:
             log.info('Request took %.03f sec.' % t.interval)
 
-    return 'application/json' , json.dumps(response.text)
+    return 'application/json' , json.dumps(json.loads(response.text))
