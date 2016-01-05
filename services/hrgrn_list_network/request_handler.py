@@ -35,12 +35,8 @@ def build_payload(url, params, session, **kwargs):
             log.debug("Response Text:")
             log.debug(r.text)
             r.raise_for_status()
-            #s = r.text.replace('\r', '\\r').replace('\n', '\\n')
-            #log.info("s")
-            #log.info(s)
             s = r.text
             parsed_response = json.loads(s.replace('\\', ''))
-
 
     finally:
         log.info('Response Building took %.03f sec.' % t.interval)

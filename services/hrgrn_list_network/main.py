@@ -30,11 +30,7 @@ def list(args):
                     print '---'
             else:
                 raise Exception("Response cannot be null!")
-            #if (response):
-            #    print json.dumps(response)
-            #    print '---'
-            #else:
-            #    raise Exception("Response cannot be null!")
+            
     except ValueError as e:
          error_msg = "ValueError Exception:" + e.message
          log.error(error_msg, exc_info=True)
