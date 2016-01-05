@@ -13,15 +13,32 @@ def parse_gene_node_parameters(params):
     result = str(separator.join(params))
     return result
 
-params_map = {
-  'proteinModification' : 'MODIFY',
-  'ppiInteraction' : 'PPI',
-  'cpi' : 'CPI',
-  'geneExpressionRegulation' : 'GENEEXPREGU',
-  'srnaRegulation' : 'SRNAREGU',
-  'transportedMolecule' : 'MOLTRANSPORT',
-  'composition' : 'COMPOSITION',
-  'coexpressedGenePair' : 'COEXP',
+edge_type_params_map = {
+  'proteinModification' : 'MODIFY_validated',
+  'showproteinModificationPredicted' : 'MODIFY_predicted',
+  'ppiInteraction' : 'PPI_validated',
+  'showppiInteractionPredicted' : 'PPI_predicted',
+  'cpi' : 'CPI_validated',
+  'showcpiPredicted' : 'CPI_predicted',
+  'geneExpressionRegulation' : 'GENEEXPREGU_validated',
+  'showgeneExpressionRegulationPredicted' : 'GENEEXPREGU_predicted',
+  'srnaRegulation' : 'SRNAREGU_validated',
+  'showsrnaRegulationPredicted' : 'SRNAREGU_predicted',
+  'transportedMolecule' : 'MOLTRANSPORT_validated',
+  'showtransportedMoleculePredicted' : 'MOLTRANSPORT_predicted',
+  'composition' : 'COMPOSITION_validated',
+  'showcompositionPredicted' : 'COMPOSITION_predicted',
+  'coexpressedGenePair' : 'COEXP_validated',
+  'showcoexpressedGenePairPredicted' : 'COEXP_predicted',
+  'chemReaction' : 'CHEMREACTION_validated',
+  'showchemReactionPredicted' : 'CHEMREACTION_predicted'
+  }
+
+param_value_map = {
+'pathalg' : 'pathalg',
+'steps' : 'steps',
+'coexpValueCutoff' : 'COEXP_value',
+'cutoffNodeRelationships' : 'cutoffHubRels'
 }
 
 def build_param_map(args, token):
@@ -33,7 +50,6 @@ def build_param_map(args, token):
     _url, _namespace = args['_url'], args['_namespace']
     list_gene_nodes = gi.get_nodes_by_genes(svc.gene_svc_url(url=_url, namespace=_namespace), \
         token, genes)
-    #nodes = parse_gene_node_parameters(list_gene_nodes)
 
     if (list_gene_nodes) and len(list_gene_nodes)==2:
         params['node1'] = list_gene_nodes[0]
@@ -47,26 +63,18 @@ def build_param_map(args, token):
 
    #extract other parameters
     for key, value in args.iteritems():
-        if not (key == 'genes'):
-            if key in ('pathalg', 'steps'):
-                params[key] = value
-            elif key == 'coexpValueCutoff':
-                params['COEXP_value'] = value
-            elif key == 'cutoffNodeRelationships':
-                params['cutoffHubRels'] = value
-            elif key in params_map.keys():
-                _key = params_map[key]
-                pred_key = "{0}_predicted".format(_key)
-                pred_value = 'T' if args['showPredictedEdge'] else 'F'
-                val_key = "{0}_validated".format(_key)
-                val_value = 'T' if args['showValidatedEdge'] else 'F'
-                params[pred_key], params[val_key] = pred_value, val_value
+         if not (key == 'locus'):
+             if ((key in edge_type_params_map.keys()) and value=='true'):
+                 _boolean_key = edge_type_params_map[key]
+                 params[_boolean_key] = 'T'
+                 log.debug("Edge Type Key:" + _boolean_key + ";Edge Type Value:" + value)
 
-                if _key == 'SRNAREGU' and not args['showsrnaRegulationPredicted']:
-                    params[pred_key] = 'F'
-                if _key == 'MODIFY' and not args['showppiInteractionPredicted']:
-                    params[pred_key] = 'F'
+             if key in param_value_map.keys():
+                 _key = param_value_map[key]
+                 params[_key] = value
+                 log.debug("Parameter Key:" + _boolean_key + ";Parameter Value:" + value)
 
-            params['format'] = 'json'
+    params['format'] = 'json'
+
 
     return params

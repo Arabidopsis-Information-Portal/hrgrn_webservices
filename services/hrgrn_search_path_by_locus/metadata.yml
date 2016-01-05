@@ -5,7 +5,7 @@ name: hrgrn_search_path_by_locus
 main_module: services.hrgrn_search_path_by_locus.main.py
 type: query
 url: http://plantgrn.noble.org/hrgrn
-version: 0.5
+version: 0.6
 tags:
   - biological network
   - gene hormone regulatory network
@@ -20,11 +20,11 @@ whitelist:
     - apps.araport.org
 endpoints:
   /search:
-          summary: Returns a biological path between two submitted gene stable identifiers in the JSON format
+          summary: Returns a biological path between two submitted gene/locus stable identifiers in the JSON format
           description: Search a path between two genes. Please, submit no more than two gene IDs
           parameters:
                - name: genes
-                 description: comma-separated list of gene stable identifiers
+                 description: comma-separated list of gene/locus stable identifiers
                  type: array
                  items:
                    type: string
@@ -53,12 +53,17 @@ endpoints:
                - name: showPredictedEdge
                  description: display predicted edge type
                  type: boolean
-                 default: true
+                 default: false
                  required: true
                - name: proteinModification
                  description: protein modification edge type data filter
                  type: boolean
                  default: true
+                 required: true
+               - name: showproteinModificationPredicted
+                 description: protein modification predicted edge type data filter
+                 type: boolean
+                 default: false
                  required: true
                - name: ppiInteraction
                  description: "protein-protein interaction edge type data filter"
@@ -68,17 +73,27 @@ endpoints:
                - name: showppiInteractionPredicted
                  description: "protein-protein interaction predicted edge type data filter"
                  type: boolean
-                 default: true
+                 default: false
                  required: true
                - name: cpi
                  description: "compound protein edge type edge type data filter"
                  type: boolean
                  default: true
                  required: true
+               - name: showcpiPredicted
+                 description: "compound protein predicted edge type edge type data filter"
+                 type: boolean
+                 default: false
+                 required: true
                - name: geneExpressionRegulation
                  description: "TF-target gene regulation edge type descriptor"
                  type: boolean
                  default: true
+                 required: true
+               - name: showgeneExpressionRegulationPredicted
+                 description: "TF-target gene regulation predicted edge type descriptor"
+                 type: boolean
+                 default: false
                  required: true
                - name: srnaRegulation
                  description: small RNA-target regulation edge type data filter
@@ -96,13 +111,39 @@ endpoints:
                  type: boolean
                  default: true
                  required: true
+               - name: showtransportedMoleculePredicted
+                 description: carrier and transported molecule predicted edge type data filter
+                 type: array
+                 type: boolean
+                 default: false
+                 required: true
                - name: composition
                  description: family/complex and member edge type data filter
                  type: boolean
                  default: true
                  required: true
+               - name: showcompositionPredicted
+                 description: family/complex and member predicted edge type data filter
+                 type: boolean
+                 default: true
+                 required: true
+               - name: chemReaction
+                 description: cathalitycal chemical reaction edge type data filter
+                 type: boolean
+                 default: true
+                 required: true
+               - name: showchemReactionPredicted
+                 description: cathalitycal chemical reaction predicted edge type data filter
+                 type: boolean
+                 default: false
+                 required: true
                - name: coexpressedGenePair
                  description: coexpressed gene pair edge type data filter
+                 type: boolean
+                 default: false
+                 required: true
+               - name: showcoexpressedGenePairPredicted
+                 description: coexpressed gene pair precited edge type data filter
                  type: boolean
                  default: true
                  required: true
