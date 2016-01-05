@@ -10,7 +10,7 @@ import request_handler as rh
 
 logging.basicConfig(level=logging.INFO)
 log = logging.getLogger(__name__)
-log.setLevel(logging.DEBUG)
+log.setLevel(logging.INFO)
 
 def list(args):
     session = Session()
@@ -21,11 +21,10 @@ def list(args):
     try:
         with timer.Timer() as t:
             log.info("Service URL:" + svc_url)
-            #response = rh.build_payload(svc_url, params, session)
-            response = rh.handle_request(svc_url, params)
-            log.debug(response.text)
+            response = rh.build_payload(svc_url, params, session)
+            log.debug(response)
             if (response):
-                print json.dumps(json.loads(response.text))
+                print json.dumps(response)
                 print '---'
             else:
                 raise Exception("Response cannot be null!")
