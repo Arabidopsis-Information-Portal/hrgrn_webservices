@@ -2,13 +2,37 @@
 import json
 import logging
 import request_handler as rh
+import request_builder as rb
+import exception
 
 logging.basicConfig(level=logging.INFO)
 log = logging.getLogger(__name__)
 log.setLevel(logging.INFO)
 
 def get_node_by_gene_id(url, token, params):
+
+    # get geneID/locus
+    geneID = rb.getGeneID(params)
+
     response = rh.handle_request(url, token, params)
+
+    if not response:
+        log.error("Empty Response!")
+        log.debug(response.text)
+        raise exception.EmptyResponse("No response received for geneID/locus: " + str(geneID))
+
+    if 'status' in response.keys():
+        if response['status'] == 'error':
+            error_msg = exception.parse_error(response)
+            log.debug("Error message:" + error_msg)
+            if exception.no_geneID_error_msg in error_msg:
+                raise exception.NotFound(error_msg)
+            else:
+                raise Exception(error_msg)
+
+    log.debug("Response:")
+    log.debug(response)
+
     node_id = response["result"][0][0]['data']['id']
     return node_id
 
