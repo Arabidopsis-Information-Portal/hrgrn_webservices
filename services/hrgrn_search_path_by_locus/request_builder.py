@@ -3,6 +3,7 @@ import json
 import logging
 import service as svc
 import gene_info_service as gi
+import exception
 
 logging.basicConfig(level=logging.INFO)
 log = logging.getLogger(__name__)
@@ -78,3 +79,17 @@ def build_param_map(args, token):
 
 
     return params
+
+def getGeneID(params):
+
+    # locus
+    _key_geneID = 'locus'
+
+    try:
+        if _key_geneID in params.keys():
+            geneID = params[_key_geneID]
+            return geneID
+        else:
+            raise exception.InvalidParameter(exception.no_geneID_parameter_error_msg)
+    except Exception as e:
+        raise exception.InvalidParameter(exception.no_geneID_parameter_error_msg)

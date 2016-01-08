@@ -5,6 +5,7 @@ import logging
 import service as svc
 import request_handler as rh
 from requests.exceptions import ConnectionError
+import exception
 
 logging.basicConfig(level=logging.INFO)
 log = logging.getLogger(__name__)
@@ -22,19 +23,31 @@ def search(args):
             print json.dumps(response)
             print '---'
     except ValueError as e:
-         error_msg = "ValueError Exception:" + e.message
+         error_msg = "Value Error:" + e.message
          log.error(error_msg, exc_info=True)
          raise Exception(error_msg)
     except requests.exceptions.HTTPError as e:
-         error_msg = "HTTPError Exception:" + e.message
+         error_msg = "HTTP Error:" + e.message
          log.error(error_msg, exc_info=True)
          raise Exception(error_msg)
     except ConnectionError as e:
-         error_msg = "ConnectionError Exception:" + e.message
+         error_msg = "Connection Error:" + e.message
          log.error(error_msg, exc_info=True)
          raise Exception(error_msg)
+    except exception.NotFound as e:
+         error_msg = e.message
+         log.error(error_msg, exc_info=True)
+         raise exception.NotFound(error_msg)
+    except exception.InvalidParameter as e:
+         error_msg = e.message
+         log.error(error_msg, exc_info=True)
+         raise exception.InvalidParameter(error_msg)
+    except exception.EmptyResponse as e:
+         error_msg = e.message
+         log.error(error_msg, exc_info=True)
+         raise exception.EmptyResponse(error_msg)
     except Exception as e:
-         error_msg = "GenericError Exception:" + e.message
+         error_msg = e.message
          log.error(error_msg, exc_info=True)
          raise Exception(error_msg)
 
