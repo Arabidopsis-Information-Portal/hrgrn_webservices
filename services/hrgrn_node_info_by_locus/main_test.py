@@ -16,16 +16,8 @@ def main():
 
     # search test case
     args = {'locus': 'AT2G38470'}
+    #args = {'locus': 'X'}
     driver.search(args)
-
-    # list test case - DON'T CALL THIS. Now it would kill the endpoint!!!
-    ##args = {}
-    ##driver.getAllGeneNodes(args)
-    #search(args)
-    #param_map = rb.build_param_map(args, TOKEN)
-    #log.info("Param Map:")
-    #log.info(param_map)
-
 
 if __name__ == '__main__':
     main()
