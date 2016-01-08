@@ -4,7 +4,7 @@ import logging
 
 logging.basicConfig(level=logging.INFO)
 log = logging.getLogger(__name__)
-log.setLevel(logging.DEBUG)
+log.setLevel(logging.INFO)
 
 class NotFound(Exception):
     pass
@@ -19,16 +19,22 @@ def parse_error(response):
 
     _key_message = 'message'
 
+    _key_exception_type = 'exception'
+
     if _key_message in response.keys():
         message = response[_key_message]
 
+    if _key_exception_type in response.keys():
+        exception_type = response[_key_exception_type]
+
     index = -1
 
-    if len(message) > 0:
-        index = message.find(no_geneID_error_msg)
+    if len(message) > 0 and exception_type == 'APIException':
+        index = message.rfind('API error')
         log.debug("Index:" + str(index))
-        message = message[index:len(message)]
-        log.debug("Error message:" + message)
+        if index > -1:
+            message = message[len('API error')+1:len(message)]
+            log.debug("Error message:" + message)
 
     return message
 

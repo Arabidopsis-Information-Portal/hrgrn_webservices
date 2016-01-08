@@ -16,6 +16,9 @@ def get_node_by_gene_id(url, token, params):
 
     response = rh.handle_request(url, token, params)
 
+    log.debug("Response:")
+    log.debug(response)
+
     if not response:
         log.error("Empty Response!")
         log.debug(response.text)
@@ -29,9 +32,6 @@ def get_node_by_gene_id(url, token, params):
                 raise exception.NotFound(error_msg)
             else:
                 raise Exception(error_msg)
-
-    log.debug("Response:")
-    log.debug(response)
 
     node_id = response["result"][0][0]['data']['id']
     return node_id
