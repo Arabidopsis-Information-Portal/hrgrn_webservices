@@ -11,4 +11,4 @@ def get_svc_base_url():
     return 'http://plantgrn.noble.org/hrgrn/element_detail'
 
 def gene_svc_url(url='https://api.araport.org/community/v0.3', namespace='hrgrn'):
-    return op.join(url, namespace, 'hrgrn_node_info_by_locus_v0.8', 'search')
+    return op.join(url, namespace, 'hrgrn_node_info_by_locus_v0.9', 'search')

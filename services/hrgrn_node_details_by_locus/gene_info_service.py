@@ -33,7 +33,15 @@ def get_node_by_gene_id(url, token, params):
             else:
                 raise Exception(error_msg)
 
-    node_id = response["result"][0][0]['data']['id']
+    try:
+             node_id = response["result"][0][0]['data']['id']
+
+             if not node_id:
+                 raise exception.NotFound(exception.no_geneID_error_msg + geneID)
+
+    except Exception as e:
+             raise exception.NotFound(exception.no_geneID_error_msg + geneID)
+
     return node_id
 
 def get_nodes_by_genes(url, token, params):

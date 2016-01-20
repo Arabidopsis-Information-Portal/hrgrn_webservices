@@ -53,9 +53,15 @@ def build_param_map(args, token):
     geneID = args['locus']
     gene_params = { 'locus':geneID }
     _url, _namespace = args['_url'], args['_namespace']
-    gene_nodeID = gi.get_node_by_gene_id(svc.gene_svc_url(url=_url, namespace=_namespace), \
-        token, gene_params)
+
+    try:
+        gene_nodeID = gi.get_node_by_gene_id(svc.gene_svc_url(url=_url, namespace=_namespace), \
+            token, gene_params)
+    except Exception as e:
+             raise exception.NotFound(exception.no_geneID_error_msg + geneID)
+
     log.info("Target Node:" + gene_nodeID)
+
     if (gene_nodeID):
         params['grnID'] = gene_nodeID
 
