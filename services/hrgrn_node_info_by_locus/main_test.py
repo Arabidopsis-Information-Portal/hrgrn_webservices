@@ -6,7 +6,7 @@ logging.basicConfig(level=logging.INFO)
 log = logging.getLogger(__name__)
 log.setLevel(logging.INFO)
 
-TOKEN="7d4ea8d35ffaea512a8ea5ae3f2a325"
+TOKEN="d148fa0d549d5489af3a87549f37485"
 
 def list(args):
      raise Exception('Not implemented yet')

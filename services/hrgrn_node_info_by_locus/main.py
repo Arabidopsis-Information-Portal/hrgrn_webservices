@@ -43,7 +43,9 @@ def search(arg):
     except exception.NotFound as e:
          error_msg = e.message
          log.error(error_msg, exc_info=True)
-         raise exception.NotFound(error_msg)
+         response = "{}"
+         print json.loads(response)
+         print '---'
     except exception.InvalidParameter as e:
          error_msg = e.message
          log.error(error_msg, exc_info=True)
