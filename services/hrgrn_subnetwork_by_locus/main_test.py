@@ -1,30 +1,31 @@
 # file: main_test.py
 import json
-import requests
 import logging
-import service as svc
+
+import exception
+import main as driver
 import request_builder as rb
 import request_handler as rh
-import main as driver
+import requests
 from requests.exceptions import ConnectionError
-import exception
+import service as svc
 
 
 logging.basicConfig(level=logging.INFO)
 log = logging.getLogger(__name__)
 log.setLevel(logging.INFO)
 
-TOKEN="b212f7763cfba528624e553bca541059"
+TOKEN = "a42d1179e11c5740b97d2e4ed58b146"
 
 def search(args):
     genes = args['genes']
     response_format = 'json'
 
-    #svc_url = rb.build_svc_url(genes)
+    token = TOKEN
     svc_url = svc.get_svc_base_url()
 
     try:
-        response = rh.build_payload(svc_url, TOKEN, args)
+        response = rh.build_payload(svc_url, token, args)
         print json.dumps(response)
         print '---'
     except ValueError as e:
@@ -42,7 +43,9 @@ def search(args):
     except exception.NotFound as e:
          error_msg = e.message
          log.error(error_msg, exc_info=True)
-         raise exception.NotFound(error_msg)
+         response = "{}"
+         print json.loads(response)
+         print '---'
     except exception.InvalidParameter as e:
          error_msg = e.message
          log.error(error_msg, exc_info=True)
@@ -63,10 +66,10 @@ def list(args):
 def main():
     """test logic for when running this module as the primary one!"""
 
-    ## pass the namespace you test again (your dev namespace or production)
+    # # pass the namespace you test again (your dev namespace or production)
     test_namespace = 'ibelyaev-dev'
 
-    args = {'genes': 'AT2G38470,AT3G55734,AT2G39885', 'pathalg':'allSimplePaths', 'steps':'2', 'showValidatedEdge': 'true', 'showPredictedEdge':'true', 'proteinModification':'true', 'showproteinModificationPredicted': 'false', 'ppiInteraction':'true', 'showppiInteractionPredicted': 'false', 'cpi':'true', 'showcpiPredicted':'false', 'geneExpressionRegulation':'true', 'showgeneExpressionRegulationPredicted':'false', 'srnaRegulation':'true', 'showsrnaRegulationPredicted': 'true', 'transportedMolecule':'true', 'showtransportedMoleculePredicted':'false', 'composition':'true', 'showcompositionPredicted':'true' ,'coexpressedGenePair':'false','showcoexpressedGenePairPredicted':'true', 'chemReaction':'true', 'showchemReactionPredicted':'false', 'coexpValueCutoff':'0.8', 'cutoffNodeRelationships':'100', '_url': 'https://api.araport.org/community/v0.3', '_namespace': test_namespace}
+    args = {'genes': 'AT2G38470,AT3G55734,AT2G39885', 'pathalg':'allSimplePaths', 'steps':'2', 'showValidatedEdge': 'true', 'showPredictedEdge':'true', 'proteinModification':'true', 'showproteinModificationPredicted': 'false', 'ppiInteraction':'true', 'showppiInteractionPredicted': 'false', 'cpi':'true', 'showcpiPredicted':'false', 'geneExpressionRegulation':'true', 'showgeneExpressionRegulationPredicted':'false', 'srnaRegulation':'true', 'showsrnaRegulationPredicted': 'true', 'transportedMolecule':'true', 'showtransportedMoleculePredicted':'false', 'composition':'true', 'showcompositionPredicted':'true' , 'coexpressedGenePair':'false', 'showcoexpressedGenePairPredicted':'true', 'chemReaction':'true', 'showchemReactionPredicted':'false', 'coexpValueCutoff':'0.8', 'cutoffNodeRelationships':'100', '_url': 'https://api.araport.org/community/v0.3', '_namespace': test_namespace}
     #args = {'genes': 'Y,X,AT2G39885', 'pathalg':'allSimplePaths', 'steps':'2', 'showValidatedEdge': 'true', 'showPredictedEdge':'true', 'proteinModification':'true', 'showproteinModificationPredicted': 'false', 'ppiInteraction':'true', 'showppiInteractionPredicted': 'false', 'cpi':'true', 'showcpiPredicted':'false', 'geneExpressionRegulation':'true', 'showgeneExpressionRegulationPredicted':'false', 'srnaRegulation':'true', 'showsrnaRegulationPredicted': 'true', 'transportedMolecule':'true', 'showtransportedMoleculePredicted':'false', 'composition':'true', 'showcompositionPredicted':'true' ,'coexpressedGenePair':'false','showcoexpressedGenePairPredicted':'true', 'chemReaction':'true', 'showchemReactionPredicted':'false', 'coexpValueCutoff':'0.8', 'cutoffNodeRelationships':'100', '_url': 'https://api.araport.org/community/v0.3', '_namespace': test_namespace}
 
     search(args)

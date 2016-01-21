@@ -1,20 +1,20 @@
 # file: main.py
 import json
-import requests
 import logging
-import service as svc
-import request_handler as rh
-from requests.exceptions import ConnectionError
+
 import exception
+import request_handler as rh
+import requests
+from requests.exceptions import ConnectionError
+import service as svc
+
 
 logging.basicConfig(level=logging.INFO)
 log = logging.getLogger(__name__)
 log.setLevel(logging.INFO)
 
 def search(args):
-    genes = args['genes']
-    response_format = 'json'
-
+   
     token = args['_token']
     svc_url = svc.get_svc_base_url()
 
@@ -37,7 +37,9 @@ def search(args):
     except exception.NotFound as e:
          error_msg = e.message
          log.error(error_msg, exc_info=True)
-         raise exception.NotFound(error_msg)
+         response = "{}"
+         print json.loads(response)
+         print '---'
     except exception.InvalidParameter as e:
          error_msg = e.message
          log.error(error_msg, exc_info=True)

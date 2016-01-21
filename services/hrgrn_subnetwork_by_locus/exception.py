@@ -2,6 +2,7 @@
 
 import logging
 
+
 logging.basicConfig(level=logging.INFO)
 log = logging.getLogger(__name__)
 log.setLevel(logging.INFO)
@@ -33,7 +34,7 @@ def parse_error(response):
         index = message.rfind('API error')
         log.debug("Index:" + str(index))
         if index > -1:
-            message = message[len('API error')+1:len(message)]
+            message = message[len('API error') + 1:len(message)]
             log.debug("Error message:" + message)
 
     return message
