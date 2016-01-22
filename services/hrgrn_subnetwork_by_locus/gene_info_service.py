@@ -15,7 +15,7 @@ def get_node_by_gene_id(url, token, params):
     log.debug(url)
 
     # get geneID/locus
-    geneID = rb.getGeneID(params)
+    geneID = rb.get_gene_id(params)
     log.debug("Gene ID:" + str(geneID))
 
     response = rh.handle_request(url, token, params)
