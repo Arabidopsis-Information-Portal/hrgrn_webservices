@@ -16,7 +16,7 @@ required parameters:
 ## API Developer Reference
 
 [API Reference]
-(https://rawgit.com/Arabidopsis-Information-Portal/PMR_API/master/doc/api/experiments/index.html)
+(https://rawgit.com/Arabidopsis-Information-Portal/hrgrn_webservices/master/doc/api/subnetwork_by_locus/index.html)
 
 ## Installation
 
