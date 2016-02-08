@@ -34,14 +34,14 @@ $ source  ~/.bash_profile
 You would need obtain a set of API keys using one-time action command. If you already have your API keys, you may skip to the next section. 
 
 ### <a name="api-client"></a>Create API client	
-Now you will issue a request to the ADAMA server to create API client. The name of the API client is ``pmr_cli_app ``.
+Now you will issue a request to the ADAMA server to create API client. The name of the API client is ``hrgrn_cli_app ``.
 
 Please, open your terminal, and run command:
 	
 ```
 $ curl -Lk -X POST \
      -u "$USERNAME:$PASSWORD"  \
-     -d "clientName=pmr_cli_app" \
+     -d "clientName=`hrgrn_cli_app" \
      $ARAPORT/clients/v2
 ```
 
@@ -65,7 +65,7 @@ Save the fields `consumerKey` and `consumerSecret`. You would need them later to
 
 ### <a name="authentication-token"></a>Obtain an Authentication Token
 
-Obtain an authentication token from the OAuth service (please, substitute `consumerKey` and `consumerSecret` with the values returned for your client application `my_cli_app`.
+Obtain an authentication token from the OAuth service (please, substitute `consumerKey` and `consumerSecret` with the values returned for your client application ``hrgrn_cli_app`.
 
 ```
 $ curl -Lk -X POST \
@@ -173,13 +173,13 @@ You may skip this step, if you already done so.
 $ cd ~
 $ mkdir -p ~/git/scienceapps
 $ cd ~/git/scienceapps
-$ git clone git@github.com:Arabidopsis-Information-Portal/PMR_API.git
+$ git clone git@github.com:Arabidopsis-Information-Portal/hrgrn_webservices.git
 ```
 
 If you checked out the code you may retrieve the most recent code updates as:
 
 ```
-$ cd ~/git/scienceapps/PMR_API/services/platform_api
+$ cd ~/git/scienceapps/hrgrn_webservices/services/hrgrn_subnetwork_by_locus
 $ git pull
 ```
 
@@ -187,7 +187,7 @@ $ git pull
 Install & Activate Virtual Environment
 
 ```
-$ cd ~/git/scienceapps/PMR_API/services/platform_api
+$ cd ~/git/scienceapps/hrgrn_webservices/services/hrgrn_subnetwork_by_locus
 $ virtualenv venv
 $ source venv/bin/activate
 ```
@@ -247,9 +247,9 @@ The namespace allows your code run independently from apis developed by others a
 
 The recommended way to create/test/deploy your services is first to publish your service in a developer workspace. Araport naming convention assumes that any developer workspace which ends in *-dev is a development namespace. The development namespace will not visible by default.
 
-**IMPORTANT**: PMR API production namespace is ``pmr ``. You may not create the duplicate namespace.
+**IMPORTANT**: HRGRN API production namespace is ``hrgrn ``. You may not create the duplicate namespace.
 
-Let's assume you will create target development namespace ``pmr-dev ``.
+Let's assume you will create target development namespace ``hrgrn-dev``.
 
 The rationality behind this step the following. 
 
@@ -259,14 +259,14 @@ Second, it will help you avoid accidental deployment into a production environme
 
 ```
 $vi ~/.bash_profile
-export NS=pmr-dev
+export NS=hrgrn-dev
 ```
 Source bash profile to make changes effective, andvalidate value of the namespace variable:
 
 ```
 $ source  ~/.bash_profile
 $ echo $NS
-pmr-dev
+hrgrn-dev
 
 ```
 
@@ -280,35 +280,35 @@ Formal command to create your namespace. We will substitute `namespace-value` wi
      $ADAMA/namespaces
 ```
 
-Run command from the terminal to create ``pmr-dev`` namespace
+Run command from the terminal to create ``hrgrn-dev`` namespace
 
 ```
  curl -Lk -X POST \
-     -F name=pmr-dev \
-     -F description="PMR Dev namespace" \
+     -F name=hrgrn-dev \
+     -F description="HRGRN Dev namespace" \
      -H "Authorization: Bearer $TOKEN" \
      $ADAMA/namespaces
 ```
 
-You should receive the response with success status for your namespace: pmr-dev`
+You should receive the response with success status for your namespace: hrgrn-dev`
 
 ```
 {
-    "result": "https://api.araport.org/community/v0.3/pmr-dev",
+    "result": "https://api.araport.org/community/v0.3/hrgrn-dev",
     "status": "success"
 }
 ```
 
-### Deploy Platform Service
+### Deploy Subnetwork by Locus Service
 
 #### Deploy Service
 
 ```
 $ pwd
-$ ~/git/scienceapps/PMR_API/services/platform_api
+$ ~/git/scienceapps/hrgrn_webservices/services/hrgrn_subnetwork_by_locus
 $ echo $NS
-pmr-dev
-$ curl -sk -L -X POST $API/$NS/services -F "git_repository=https://github.com/Arabidopsis-Information-Portal/PMR_API.git" -F "metadata=services/platform_api" -H "Authorization: Bearer $TOKEN"
+hrgrn-dev
+$ curl -sk -L -X POST $API/$NS/services -F "git_repository=https://github.com/Arabidopsis-Information-Portal/hrgrn_webservices.git" -F "metadata=services/hrgrn_subnetwork_by_locus" -H "Authorization: Bearer $TOKEN"
 ```
 
 
@@ -318,10 +318,10 @@ Response Received:
 {
     "message": "registration started",
     "result": {
-        "list_url": "https://api.araport.org/community/v0.3/pmr-dev/pmr_platform_api_v0.4/list",
+        "list_url": "https://api.araport.org/community/v0.3/hrgrn-dev/hrgrn_subnetwork_by_locus_v0.9/list",
         "notification": "",
-        "search_url": "https://api.araport.org/community/v0.3/pmr-dev/pmr_platform_api_v0.4/search",
-        "state_url": "https://api.araport.org/community/v0.3/pmr-dev/pmr_platform_api_v0.4"
+        "search_url": "https://api.araport.org/community/v0.3/hrgrn-dev/hrgrn_subnetwork_by_locus_v0.9/search",
+        "state_url": "https://api.araport.org/community/v0.3/hrgrn-dev/hrgrn_subnetwork_by_locus_v0.9"
     },
     "status": "success"
 }
@@ -330,7 +330,7 @@ Response Received:
 #### Validate Service Status
 
 ```
-$ curl -skL -X GET -H "Authorization: Bearer $TOKEN" "$API/$NS/pmr_platform_api_v0.4"
+$ curl -skL -X GET -H "Authorization: Bearer $TOKEN" "$API/$NS/hrgrn_subnetwork_by_locus_v0.9"
 ```
 
 Partial Response:
@@ -341,49 +341,49 @@ Partial Response:
         "service": {
             "authors": [
                 {
-                    "email": "mash@iastate.edu, mhhur@iastate.edu",
-                    "name": "Eve Syrkin Wurtele, Manhoi Hur",
-                    "sponsor_organization": "The Plant/Eukaryotic and Microbial Systems Resource, Human Computer Interaction and Department of Genetics Development and Cell Biology,Iowa State University",
-                    "sponsor_uri": "http://metnetdb.org/PMR/"
+                    "email": "bioinfo@noble.org",
+                    "name": "Xinbin Dai",
+                    "sponsor_organization": "The Samuel Roberts Noble Foundation",
+                    "sponsor_uri": "http://plantgrn.noble.org/hrgrn"
                 },
                 
 ...
 
-"validate_request": false,
+},
+            "validate_request": false,
             "validate_response": false,
-            "version": 0.4,
+            "version": 0.9,
             "whitelist": {
                 "129.114.97.1": {},
                 "129.114.97.2": {},
                 "129.116.84.203": {},
                 "172.17.42.1": {},
-                "metnetdb.org": {},
-                "pmr-webapi.gdcb.iastate.edu": {}
+                "api.araport.org": {},
+                "plantgrn.noble.org": {}
             },
             "workers": [
-                "58361c2e128a967b86ada96b6ded0e6127b9aaa94f6d556b32be31b36361af72"
+                "8bed7b162cd5f14ceb57f4f6b19a1558cf0cd94d918d05370faa2f46499a375a"
             ]
         }
     },
-    "status": "success"
-}
+    "status": "success"}
 
 ```
 
 #### Issue a Search Request
 
 ```
-$curl -v -H "Authorization: Bearer $TOKEN" "https://api.araport.org/community/v0.3/pmr/pmr_experiments_api_v0.4/search?experimentID=106"
+$curl -v -H "Authorization: Bearer $TOKEN" "https://api.araport.org/community/v0.3/$NS/hrgrn_subnetwork_by_locus_v0.9/search?genes=AT2G38470%2CAT3G55734%2CAT2G39885%2CAT3G26810&pathalg=allSimplePaths&steps=2&showValidatedEdge=true&showPredictedEdge=true&proteinModification=true&ppiInteraction=true&showppiInteractionPredicted=true&cpi=true&geneExpressionRegulation=true&srnaRegulation=true&showsrnaRegulationPredicted=true&transportedMolecule=true&composition=true&coexpressedGenePair=true&coexpValueCutoff=0.8&cutoffNodeRelationships=100"
 ```
 
 Response Received:
 
 ```
  HTTP/1.1 200 OK
-< Date: Mon, 01 Feb 2016 03:48:56 GMT
+< Date: Mon, 08 Feb 2016 20:04:08 GMT
 * Server WSO2-PassThrough-HTTP is not blacklisted
 < Server: WSO2-PassThrough-HTTP
-< Link: https://api.araport.org/community/v0.3/pmr-dev/pmr_platform_api_v0.4/prov/37b30b1f58e24b6fb916a28e7da37624; rel="http://www.w3.org/ns/prov#has_provenance"
+< Link: https://api.araport.org/community/v0.3/hrgrn-dev/hrgrn_subnetwork_by_locus_v0.9/prov/b67a56faaf7b43489eb1335b8ded78b6; rel="http://www.w3.org/ns/prov#has_provenance"
 < Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept, Authorization, Content-Range, Range
 < Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS
 < Content-Type: application/json
@@ -393,37 +393,11 @@ Response Received:
 < Transfer-Encoding: chunked
 <
 {"result": [
-{"platformId": 100, "expName": "At2010-KO 1", "platformName": "Ultra Performance Liquid Chromatography [Shulaev lab]", "species": "Arabidopsis_thaliana", "expId": 106}
+{"nodes": [{"data": {"color": "#000000", "type": "Protein", "border_color": "#ff0000", "zoom": "3", "label": "ATWRKY33", "shape": "diamond", "tftr": "WRKY", "tips": "ATWRKY33; WRKY33, AT2G38470, ID=np21061, Protein, transcription factor family WRKY", "locus": "AT2G38470", "background_color": "#FCFCFC", "id": "np21061"}}, {"data": {"miRBase": "MIMAT0000935", "type": "non-coding-miRNA", "border_color": "#0070ff", "zoom": "3", "label": "ath-miR393b", "color": "#000000", "shape": "rectangle", "tftr": "", "tips": "ath-miR393b, AT3G55734, ID=nn03777, non-coding-miRNA", "locus": "AT3G55734", "background_color": "#FCFCFC", "id": "nn03777"}},
+...
+ps": "protein-protein interaction (#re266551)"}}]}
 ],
-"metadata": {"time_in_main": 0.11180996894836426},
-"status": "success"}
-* Closing connection 0
-```
-
-#### Issue a List Request
-
-```
-$ curl -v -H "Authorization: Bearer $TOKEN" "https://api.araport.org/community/v0.3/$NS/pmr_platform_api_v0.4/list?experimentID=106"
-```
-
-```
-HTTP/1.1 200 OK
-< Date: Mon, 01 Feb 2016 03:49:50 GMT
-* Server WSO2-PassThrough-HTTP is not blacklisted
-< Server: WSO2-PassThrough-HTTP
-< Link: https://api.araport.org/community/v0.3/pmr-dev/pmr_platform_api_v0.4/prov/d4bb6661130f40ce8fc8ba54c25e06dd; rel="http://www.w3.org/ns/prov#has_provenance"
-< Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept, Authorization, Content-Range, Range
-< Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS
-< Content-Type: application/json
-< Access-Control-Allow-Origin: *
-< Access-Control-Allow-Credentials: true
-< Connection: close
-< Transfer-Encoding: chunked
-<
-{"result": [
-[{"platformId": 84, "expName": "At2010-KO 1", "platformName": "Fatty Acids [Nikolau lab]", "species": "Arabidopsis_thaliana", "expId": 106}, {"platformId": 87, "expName": "At2010-KO 1", "platformName": "Phytosterols [Lange lab]", "species": "Arabidopsis_thaliana", "expId": 106}, {"platformId": 88, "expName": "At2010-KO 1", "platformName": "Isoprenoids [Lange lab]", "species": "Arabidopsis_thaliana", "expId": 106}, {"platformId": 89, "expName": "At2010-KO 1", "platformName": "Lipidomics [Welti lab]", "species": "Arabidopsis_thaliana", "expId": 106}, {"platformId": 90, "expName": "At2010-KO 1", "platformName": "Non-targeted GC-TOF [Fiehn lab]", "species": "Arabidopsis_thaliana", "expId": 106}, {"platformId": 91, "expName": "At2010-KO 1", "platformName": "Non-targeted UPLC-Q-TOF [Sumner lab]", "species": "Arabidopsis_thaliana", "expId": 106}, {"platformId": 95, "expName": "At2010-KO 1", "platformName": "Cuticle Wax [Nikolau lab]", "species": "Arabidopsis_thaliana", "expId": 106}, {"platformId": 100, "expName": "At2010-KO 1", "platformName": "Ultra Performance Liquid Chromatography [Shulaev lab]", "species": "Arabidopsis_thaliana", "expId": 106}]
-],
-"metadata": {"time_in_main": 0.058409929275512695},
+"metadata": {"time_in_main": 2.6913928985595703},
 "status": "success"}
 * Closing connection 0
 ```
@@ -431,7 +405,7 @@ HTTP/1.1 200 OK
 #### Delete Service (optional, required to redeploy the service of the same version)
 
 ```
-$curl -Lk -X DELETE -H "Authorization: Bearer $TOKEN" https://api.araport.org/community/v0.3/$NS/pmr_platform_api_v0.4
+$curl -Lk -X DELETE -H "Authorization: Bearer $TOKEN" https://api.araport.org/community/v0.3/$NS/hrgrn_subnetwork_by_locus_v0.9"
 ```
 
 Response Received:
@@ -449,11 +423,12 @@ You may repeat deployment steps above as needed.
 To test your code locally you may extend or simply run `main_test.py` from the command line. It has a test code for the search and list endpoints.
 
 ```
-$cd ~/git/scienceapps/PMR_API/services/platform_api
+$cd ~/git/scienceapps/hrgrn_webservices/services/hrgrn_subnetwork_by_locus
 $ python main_test.py
 ```
 
-You should receive the success message for both search and list requests issued.
+Please, make sure your virtual environment is activated.
+You should receive the success message for both search and list requests issued. 
 
 Note the results received in your terminal. You may test the webservice endpoints separately by commenting one of them and running thest module from the command line.
 
@@ -464,7 +439,7 @@ Note the results received in your terminal. You may test the webservice endpoint
 2. From the root source code directory run:
 
 ```
-$ cd ~/git/scienceapps/PMR_API/services/platform_api
+$ cd ~/git/scienceapps/hrgrn_webservices/services/hrgrn_subnetwork_by_locus
 $ ./build_doc.sh
 ```
 3. API documentation is generated in [API Doc Folder.](../../doc/api/platform/toc.html)
