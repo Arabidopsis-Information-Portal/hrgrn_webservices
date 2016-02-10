@@ -1,17 +1,25 @@
 # HRGRN Subnetwork By Locus API
 
+## Description: Retrieves Biological Subnetwork by locus 
+
 ## Endpoints
 
 ### Search
-required parameters: 
-	
-* genes
 
+| Parameter Name | Requred | Description      | Default |
+|----------------|---------|------------------|---------|
+| locus          | Yes     | locus or gene ID | None    |
+	
+
+## Resource Information
+
+| Methods          | GET  |
+|------------------|------|
+| Response formats | json |
 
 ### List
-required parameters: 
 	
-* None
+* Not Implemented
 
 ## API Developer Reference
 
