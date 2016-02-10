@@ -159,7 +159,7 @@ endpoints:
                  required: true
 
 requirements:
-     - demjson
+     - epydoc
 authors:
     - name: Xinbin Dai
       email: bioinfo@noble.org
