@@ -5,7 +5,7 @@ name: hrgrn_list_network
 main_module: services.hrgrn_list_network.main.py
 type: query
 url: http://plantgrn.noble.org/hrgrn
-version: 0.8
+version: 0.9
 tags:
   - biological network
   - gene hormone regulatory network
