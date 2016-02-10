@@ -1,4 +1,4 @@
-# Node Details By Locus API
+# NRGRN Node Details By Locus API
 
 ### Description: Retrieves node details by locus
 

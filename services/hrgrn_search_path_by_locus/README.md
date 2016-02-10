@@ -1,4 +1,4 @@
-# Search Path By Locus API
+# NGRGRN Search Path By Locus API
 
 ### Description: Searches a path between two genes by locus
 
