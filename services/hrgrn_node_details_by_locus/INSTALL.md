@@ -372,7 +372,7 @@ Partial Response:
 #### Issue a Search Request
 
 ```
-$curl -v -H "Authorization: Bearer $TOKEN" https://api.araport.org/community/v0.3/$NS/hrgrn_node_details_by_locus_v0.9/search?locus=AT3G46810
+$curl -v -H "Authorization: Bearer $TOKEN" https://api.araport.org/community/v0.3/$NS/hrgrn_node_details_by_locus_v0.9/search?locus=AT3G46810"
 ```
 
 Response Received:
