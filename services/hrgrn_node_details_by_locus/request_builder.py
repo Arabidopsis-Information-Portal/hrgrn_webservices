@@ -1,4 +1,26 @@
-# file: request_builder.py
+# HRGRN WebServices
+# Copyright (C) 2016  Xinbin Dai, Irina Belyaeva
+
+# This file is part of HRGRN WebServices API.
+#
+# HRGRN API is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 2 of the License, or
+# (at your option) any later version.
+
+# HRGRN API is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with HRGRN API.  If not, see <http://www.gnu.org/licenses/>.
+
+"""
+Builds Request Parameters from a query string
+"""
+
+
 import json
 import logging
 import service as svc
@@ -8,11 +30,6 @@ import exception
 logging.basicConfig(level=logging.INFO)
 log = logging.getLogger(__name__)
 log.setLevel(logging.INFO)
-
-def parse_gene_node_parameters(params):
-    separator = ";"
-    result = str(separator.join(params))
-    return result
 
 edge_type_params_map = {
   'proteinModification' : 'MODIFY_validated',
@@ -42,48 +59,124 @@ param_value_map = {
 'cutoffNodeRelationships' : 'cutoffHubRels'
 }
 
+# This function transforms a list of gene identifiers to string of identifiers separated by a semicolon
+def parse_gene_node_parameters(params):
+    """Create a string of gene identifiers separated by a semicolon 
+    
+    :type params: list
+    :param name: The list of gene identifiers
+    
+    :rtype: string
+    :return: Returns gene identifiers separated by a semicolon
+    
+    """    
+    separator = ";"
+    result = str(separator.join(params))
+    return result
 
+
+# This function builds a parameter map to pass to the underlying webservice
 def build_param_map(args, token):
+    """Build a parameter map,
+    add default parameters
+    validate parameters/values
+    match passed parameters by name with parameters of the underlying service
+    
+    :type args: dict
+    :param args: The dictionary(map) of parameters submitted via query string 
+    
+    :rtype: string
+    :return: Returns parameter map that matches to the underlying webservice
+    
+    """
     params = {}
 
-    validateParameters(args)
-
+   
+     # add default parameters
     params['hasParams']='T'
-    # extract gene nodes
+    params['format'] = 'json'
+    
+    # extract gene nodes from query url
+    # validate parameters first using fail-first approach
+    validateParameters(args)
+    
+    # extract gene/locus ID
     geneID = args['locus']
     gene_params = { 'locus':geneID }
     _url, _namespace = args['_url'], args['_namespace']
 
-    try:
-        gene_nodeID = gi.get_node_by_gene_id(svc.gene_svc_url(url=_url, namespace=_namespace), \
+
+    # extract node value by gene/locus ID
+    # invoke node details by locus internally   
+    gene_nodeID = gi.get_node_by_gene_id(svc.gene_svc_url(url=_url, namespace=_namespace), \
             token, gene_params)
-    except Exception as e:
-             raise exception.NotFound(exception.no_geneID_error_msg + geneID)
 
-    log.info("Target Node:" + gene_nodeID)
 
+    log.debug("Target Node:" + gene_nodeID)
+
+    # check if a gene node has been found otherwise raise not found exception
     if (gene_nodeID):
         params['grnID'] = gene_nodeID
+    else:
+        raise exception.NotFound(exception.no_geneID_error_msg + geneID)
 
    #extract other parameters
     for key, value in args.iteritems():
+        # skip genes parameter, we already mapped it over
         if not (key == 'locus'):
+             # map edge type parameters
             if ((key in edge_type_params_map.keys()) and value=='true'):
                 _boolean_key = edge_type_params_map[key]
                 params[_boolean_key] = 'T'
                 log.debug("Edge Type Key:" + _boolean_key + ";Edge Type Value:" + value)
-
+             # map non-edge type parameters
             if key in param_value_map.keys():
                 _key = param_value_map[key]
                 params[_key] = value
                 log.debug("Parameter Key:" + _boolean_key + ";Parameter Value:" + value)
 
-    params['format'] = 'json'
-
     return params
 
+def get_gene_id(params):
+    """Retrieve a gene identifier if parameter locus is present,
+    raise error otherwise
+    
+    :type params: dict
+    :param params: key/value of a locus identifier  
+    
+    :raises: :class: 'exception.InvalidParameter
+    
+    :rtype: string
+    :return: Returns a gene identifier
+    
+     """
 
+    # locus
+    _key_geneID = 'locus'
+
+    has_param(params, _key_geneID, exception.no_geneID_parameter_error_msg)
+    geneID = params[_key_geneID]
+    
+     # validate value of gene identifier
+    has_value(_key_geneID, geneID, exception.no_geneID_parameter_error_msg)
+    
+    return geneID
+
+# This function retrieves a gene identifier from a parameter map d
 def validateParameters(params):
+    """Retrieve a gene identifier if parameter locus is present,
+    raise error otherwise
+    
+    :type params: dict
+    :param params: key/value of a locus identifier  
+    
+    :raises: :class: 'exception.InvalidParameter
+    
+    :rtype: string
+    :return: Returns a gene identifier
+    
+    """
+    # key of locus parameter
     _key_geneID = 'locus'
 
     try:
@@ -92,16 +185,56 @@ def validateParameters(params):
     except Exception as e:
         raise exception.InvalidParameter(exception.no_geneID_parameter_error_msg)
 
-def getGeneID(params):
+# This function validates if a parameter map has a requested key    
+def has_param(params, param_key, error_msg):
+    """Validate if a parameter map has a requested key
+    raise error otherwise
+    
+    :type params: dict
+    :param params: key/value a parameter map  
+    
+    :type param_key: string
+    :param param_key: parameter key  
+    
+    :raises: :class: 'exception.InvalidParameter
+    
+    :rtype: True
+    :return: Returns True if success
+    
+    """
+    
+    if not error_msg:
+        error_msg = "No Parameter " + str(param_key) + " is present"
+   
+    log.debug("Param Key:" + param_key)
+    
+    if param_key in params.keys():
+            return True
+    else:
+            raise exception.InvalidParameter(error_msg)
 
-    # locus
-    _key_geneID = 'locus'
-
-    try:
-        if _key_geneID in params.keys():
-            geneID = params[_key_geneID]
-            return geneID
-        else:
-            raise exception.InvalidParameter(exception.no_geneID_parameter_error_msg)
-    except Exception as e:
-        raise exception.InvalidParameter(exception.no_geneID_parameter_error_msg)
+# This function validates if a key has a non-null value       
+def has_value(_key, _value, error_msg):
+    """Validate if a key has a non-null value
+    raise error otherwise
+    
+    :type _key: string
+    :param params: name of the parameter
+    
+    :type _value: string
+    :param _value: value of the parameter 
+    
+    :raises: :class: 'exception.InvalidParameter
+    
+    :rtype: True
+    :return: Returns True if success
+    
+    """
+    
+    if not error_msg:
+        error_msg = "No Value for " + str(_key) + " is present"
+       
+    if _value:
+        return True
+    else:
+            raise exception.InvalidParameter(error_msg)  
