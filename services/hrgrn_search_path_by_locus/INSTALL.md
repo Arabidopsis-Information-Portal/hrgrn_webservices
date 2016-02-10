@@ -440,7 +440,7 @@ Note the results received in your terminal. You may test the webservice endpoint
 $ cd ~/git/scienceapps/hrgrn_webservices/services/hrgrn_search_path_by_locus
 $ ./build_doc.sh
 ```
-3. API documentation is generated in [API Doc Folder.](../../doc/api/search_path_by_locus/toc.html)
+3. API documentation is generated in [API Doc Folder.](../../doc/api/search_path_by_locus)
 
 
 Optionally, you may customize the files included, the output format using API doc [configuration file.](doc.config)

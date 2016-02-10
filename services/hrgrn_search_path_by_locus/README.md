@@ -50,7 +50,7 @@
 ## API Developer Reference
 
 [API Reference]
-(https://rawgit.com/Arabidopsis-Information-Portal/hrgrn_webservices/master/doc/api/hrgrn_search_path_by_locus/index.html)
+(https://rawgit.com/Arabidopsis-Information-Portal/hrgrn_webservices/master/doc/api/search_path_by_locus/index.html)
 
 ## Installation
 

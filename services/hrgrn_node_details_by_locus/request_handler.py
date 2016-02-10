@@ -61,6 +61,7 @@ def handle_request(url, token, params, **kwargs):
     response = requests.get(url, headers=headers, params=params)
 
     # Raise exception and abort if requests is not successful
+    response.raise_for_status()
 
     try:
         # Try to convert result to JSON
