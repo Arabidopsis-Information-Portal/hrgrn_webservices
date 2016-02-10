@@ -1,4 +1,26 @@
-# file: main.py
+# HRGRN WebServices
+# Copyright (C) 2016  Xinbin Dai, Irina Belyaeva
+
+# This file is part of HRGRN WebServices API.
+#
+# HRGRN API is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 2 of the License, or
+# (at your option) any later version.
+
+# HRGRN API is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with HRGRN API.  If not, see <http://www.gnu.org/licenses/>.
+
+
+"""
+Main Module
+"""
+
 import json
 import requests
 import logging
@@ -12,8 +34,11 @@ logging.basicConfig(level=logging.INFO)
 log = logging.getLogger(__name__)
 log.setLevel(logging.INFO)
 
+# This function acts as a list endpoint
 def list(args):
     session = Session()
+    
+    # get service url
     svc_url = svc.get_svc_base_url()
 
     params = {'listall': 'T', 'format':'json'}
@@ -21,6 +46,7 @@ def list(args):
     try:
         with timer.Timer() as t:
             log.info("Service URL:" + svc_url)
+            # execute request
             response = rh.build_payload(svc_url, params, session)
             log.debug(response)
 
