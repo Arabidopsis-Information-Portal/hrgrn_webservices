@@ -1,6 +1,6 @@
-# Node Details By Locus API
+# Search Path By Locus API
 
-### Description: Retrieves node details by locus
+### Description: Searches a path between two genes by locus
 
 ## Endpoints
 
@@ -9,7 +9,7 @@
 ### 
 | Parameter Name                        | Requred | Description                                                      | Default        |
 |---------------------------------------|---------|------------------------------------------------------------------|----------------|
-| locus                                 | Yes     | locus/gene ID                                                    |                |
+| genes                                 | Yes     | locus/gene IDs. No more than two gene identifiers accepted.                                                    |                |
 | pathalg                               | Yes     | network path algorithm                                           | allSimplePaths |
 | steps                                 | Yes     | number of steps                                                  | 2              |
 | showValidatedEdge                     | Yes     | display validated edge type                                      | True           |
@@ -50,7 +50,7 @@
 ## API Developer Reference
 
 [API Reference]
-(https://rawgit.com/Arabidopsis-Information-Portal/hrgrn_webservices/master/doc/api/node_details_by_locus/index.html)
+(https://rawgit.com/Arabidopsis-Information-Portal/hrgrn_webservices/master/doc/api/hrgrn_search_path_by_locus/index.html)
 
 ## Installation
 

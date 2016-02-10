@@ -179,7 +179,7 @@ $ git clone git@github.com:Arabidopsis-Information-Portal/hrgrn_webservices.git
 If you checked out the code you may retrieve the most recent code updates as:
 
 ```
-$ cd ~/git/scienceapps/hrgrn_webservices/services/hrgrn_node_details_by_locus
+$ cd ~/git/scienceapps/hrgrn_webservices/services/hrgrn_search_path_by_locus
 $ git pull
 ```
 
@@ -187,7 +187,7 @@ $ git pull
 Install & Activate Virtual Environment
 
 ```
-$ cd ~/git/scienceapps/hrgrn_webservices/services/hrgrn_node_details_by_locus
+$ cd ~/git/scienceapps/hrgrn_webservices/services/hrgrn_search_path_by_locus
 $ virtualenv venv
 $ source venv/bin/activate
 ```
@@ -299,16 +299,16 @@ You should receive the response with success status for your namespace: hrgrn-de
 }
 ```
 
-### Deploy Node Details by Locus Service
+### Deploy Search Path by Locus Service
 
 #### Deploy Service
 
 ```
 $ pwd
-$ ~/git/scienceapps/hrgrn_webservices/services/hrgrn_node_details_by_locus
+$ ~/git/scienceapps/hrgrn_webservices/services/hrgrn_search_path_by_locus
 $ echo $NS
 hrgrn-dev
-$ curl -sk -L -X POST $API/$NS/services -F "git_repository=https://github.com/Arabidopsis-Information-Portal/hrgrn_webservices.git" -F "metadata=services/hrgrn_node_details_by_locus" -H "Authorization: Bearer $TOKEN"
+$ curl -sk -L -X POST $API/$NS/services -F "git_repository=https://github.com/Arabidopsis-Information-Portal/hrgrn_webservices.git" -F "metadata=services/hrgrn_search_path_by_locus" -H "Authorization: Bearer $TOKEN"
 ```
 
 
@@ -318,10 +318,10 @@ Response Received:
 {
     "message": "registration started",
     "result": {
-        "list_url": "https://api.araport.org/community/v0.3/hrgrn-dev/hrgrn_node_details_by_locus_v0.9/list",
+        "list_url": "https://api.araport.org/community/v0.3/hrgrn-dev/hrgrn_search_path_by_locus_v0.9/list",
         "notification": "",
-        "search_url": "https://api.araport.org/community/v0.3/hrgrn-dev/hrgrn_node_details_by_locus_v0.9/search",
-        "state_url": "https://api.araport.org/community/v0.3/hrgrn-dev/hrgrn_node_details_by_locus_v0.9"
+        "search_url": "https://api.araport.org/community/v0.3/hrgrn-dev/hrgrn_search_path_by_locus_v0.9/search",
+        "state_url": "https://api.araport.org/community/v0.3/hrgrn-dev/hrgrn_search_path_by_locus_v0.9"
     },
     "status": "success"
 }
@@ -330,7 +330,7 @@ Response Received:
 #### Validate Service Status
 
 ```
-$ curl -skL -X GET -H "Authorization: Bearer $TOKEN" "$API/$NS/hrgrn_node_details_by_locus_v0.9"
+$ curl -skL -X GET -H "Authorization: Bearer $TOKEN" "$API/$NS/hrgrn_search_path_by_locus_v0.9"
 ```
 
 Partial Response:
@@ -345,7 +345,7 @@ Partial Response:
                     "name": "Xinbin Dai",
                     "sponsor_organization": "The Samuel Roberts Noble Foundation",
                     "sponsor_uri": "http://plantgrn.noble.org/hrgrn"
-                },                
+                },               
 ...
 
 },
@@ -372,17 +372,17 @@ Partial Response:
 #### Issue a Search Request
 
 ```
-$curl -v -H "Authorization: Bearer $TOKEN" https://api.araport.org/community/v0.3/$NS/hrgrn_node_details_by_locus_v0.9/search?locus=AT3G46810
+$ curl -v -H "Authorization: Bearer $TOKEN" "https://api.araport.org/community/v0.3/$NS/hrgrn_search_path_by_locus_v0.9/search?genes=AT2G38470%2CAT3G55734&pathalg=allSimplePaths&steps=2&showValidatedEdge=true&showPredictedEdge=true&proteinModification=true&ppiInteraction=true&showppiInteractionPredicted=true&cpi=true&geneExpressionRegulation=true&srnaRegulation=true&showsrnaRegulationPredicted=true&transportedMolecule=true&composition=true&coexpressedGenePair=true&coexpValueCutoff=0.8&cutoffNodeRelationships=100"
 ```
 
 Response Received:
 
 ```
- < HTTP/1.1 200 OK
-< Date: Wed, 10 Feb 2016 18:42:56 GMT
+< HTTP/1.1 200 OK
+< Date: Wed, 10 Feb 2016 20:30:06 GMT
 * Server WSO2-PassThrough-HTTP is not blacklisted
 < Server: WSO2-PassThrough-HTTP
-< Link: https://api.araport.org/community/v0.3/hrgrn-dev/hrgrn_node_details_by_locus_v0.9/prov/0328dda1b05541fcac8d211f570e43ee; rel="http://www.w3.org/ns/prov#has_provenance"
+< Link: https://api.araport.org/community/v0.3/hrgrn-dev/hrgrn_search_path_by_locus_v0.9/prov/60aeb80f32ab41648744010377138e97; rel="http://www.w3.org/ns/prov#has_provenance"
 < Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept, Authorization, Content-Range, Range
 < Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS
 < Content-Type: application/json
@@ -392,9 +392,9 @@ Response Received:
 < Transfer-Encoding: chunked
 <
 {"result": [
-{"nodes": [{"data": {"level": "20", "color": "#000000", "type": "Protein", "border_color": "#ff0000", "zoom": "2", "label": "AT3G46810", "shape": "diamond", "tftr": "PHD", "tips": "AT3G46810, ID=np25574, Protein, chromatin regulator family PHD", "locus": "AT3G46810", "background_color": "#FCFCFC", "id": "np25574"}}], "edges": []}
+{"nodes": [{"data": {"color": "#000000", "type": "Protein", "border_color": "#ff0000", "zoom": "3", "label": "ATWRKY33", "shape": "diamond", "tftr": "WRKY", "tips": "ATWRKY33; WRKY33, AT2G38470, ID=np21061, Protein, transcription factor family WRKY", "locus": "AT2G38470", "background_color": "#FCFCFC", "id": "np21061"}}, {"data": {"miRBase": "MIMAT0000935", "type": "non-coding-miRNA", "border_color": "#0070ff", "zoom": "3", "label": "ath-miR393b", "color": "#000000", "shape": "rectangle", "tftr": "", "tips": "ath-miR393b, AT3G55734, ID=nn03777, non-coding-miRNA", "locus": "AT3G55734", "background_color": "#FCFCFC", "id": "nn03777"}}], "edges": [{"data": {"directed": "true", "line_color": "#1D6914", "target": "np21061", "grnID": "re114256", "target_arrow_color": "#1D6914", "source": "nn03777", "target_arrow_shape": "tee", "id": "95247", "line_style": "dotted", "validated": "N", "type": "SRNAREGU", "tips": "<i>ath-miR393b</i> inhibits the expression of <i>ATWRKY33; WRKY33</i>"}}]}
 ],
-"metadata": {"time_in_main": 0.43668699264526367},
+"metadata": {"time_in_main": 0.9019877910614014},
 "status": "success"}
 * Closing connection 0
 ```
@@ -403,7 +403,7 @@ Response Received:
 
 ```
 $
-curl -Lk -X DELETE -H "Authorization: Bearer $TOKEN" https://api.araport.org/community/v0.3/$NS/hrgrn_node_details_by_locus_v0.9"
+curl -Lk -X DELETE -H "Authorization: Bearer $TOKEN" https://api.araport.org/community/v0.3/$NS/hrgrn_search_path_by_locus_v0.9"
 ```
 
 Response Received:
@@ -421,7 +421,7 @@ You may repeat deployment steps above as needed.
 To test your code locally you may extend or simply run `main_test.py` from the command line. It has a test code for the search and list endpoints.
 
 ```
-$cd ~/git/scienceapps/hrgrn_webservices/services/hrgrn_node_details_by_locus
+$cd ~/git/scienceapps/hrgrn_webservices/services/hrgrn_search_path_by_locus
 $ python main_test.py
 ```
 
@@ -437,10 +437,10 @@ Note the results received in your terminal. You may test the webservice endpoint
 2. From the root source code directory run:
 
 ```
-$ cd ~/git/scienceapps/hrgrn_webservices/services/hrgrn_node_details_by_locus
+$ cd ~/git/scienceapps/hrgrn_webservices/services/hrgrn_search_path_by_locus
 $ ./build_doc.sh
 ```
-3. API documentation is generated in [API Doc Folder.](../../doc/api/node_details_by_locus/toc.html)
+3. API documentation is generated in [API Doc Folder.](../../doc/api/search_path_by_locus/toc.html)
 
 
 Optionally, you may customize the files included, the output format using API doc [configuration file.](doc.config)
