@@ -15,7 +15,7 @@ logging.basicConfig(level=logging.INFO)
 log = logging.getLogger(__name__)
 log.setLevel(logging.INFO)
 
-TOKEN = "d97be38d3dbed6e93c76be895e1da5"
+TOKEN = "e0e9ab1c63dc118fa1278ec11b5d9bd0"
 
 def search(args):
     genes = args['genes']
